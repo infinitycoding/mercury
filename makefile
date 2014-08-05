@@ -3,7 +3,7 @@ OBJS = $(addsuffix .o,$(basename $(SRCS)))
 
 
 
-CFLAGS = -m32 -Wall -g -nostdinc -fno-stack-protector -fno-builtin -fno-builtin-log -Wimplicit-function-declaration -nostdinc -I include
+L_CFLAGS = -m32 -Wall -g -nostdinc -fno-stack-protector -fno-builtin -fno-builtin-log -Wimplicit-function-declaration -nostdinc -I include
 ASFLAGS =-felf32
 
 
@@ -18,7 +18,7 @@ libc.a: $(OBJS)
 	@ar -rcs $@ $^
 
 %.o: %.c
-	@${CC} $(CFLAGS) -c -o $@ $^
+	$(CC) ${CFLAGS} $(L_CFLAGS) -c -o $@ $^
 
 clean:
 	@rm $(OBJS) -f
