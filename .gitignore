@@ -1,0 +1,31 @@
+#Windows Thumbnails ignorieren
+Thumbs.db
+
+#Objektdateien ignorieren
+*.o
+*.a
+*.x
+
+#Ausführbare Dateien ignoriere
+*.elf
+
+#Andere unerwünschte Daten
+.directory
+.cproject
+.project
+.init.c.swp
+*.c~
+*.iso
+*.lst~
+*.asm~
+*.h~
+*.gen~
+*~
+*.swp
+*.orig
+makefile~
+Makefile~
+*.ld~
+.gitignore~
+*.sh~
+
