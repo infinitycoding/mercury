@@ -1,6 +1,3 @@
-#ifndef _stdlib_h_
-#define _stdlib_h_
-
 /*
      Copyright 2012-2014 Infinitycoding all rights reserved
      This file is part of the mercury c-library.
@@ -22,51 +19,21 @@
 /**
 	@author Michael Sippel <micha@infinitycoding.de>
 */
-#include <stdint.h>
+#include <universe.h>
+#include <stdlib.h>
 
-#define NUM_PAGES(n) ((((n) + 0xfff) & 0xfffff000) / 4096)
-
-typedef struct
+int abs(int j)
 {
-	int quot;
-	int rem;
-} div_t;
+	return (j > 0) ? (j) : (-j);
+}
 
-typedef struct
+long int labs(long int j)
 {
-	long quot;
-	long rem;
-} ldiv_t;
+	return (j > 0) ? (j) : (-j);
+}
 
-typedef struct
+long long int llabs(long long int j)
 {
-	long long quot;
-	long long rem;
-} lldiv_t;
-
-int atoi(const char *nptr);
-long int atol(const char *nptr);
-long long int atoll(const char *nptr);
-
-int rand(void);
-void srand(unsigned int seed);
-
-void exit(int retv);
-
-void *malloc(size_t size);
-void free(void *ptr);
-void *calloc(size_t num, size_t size);
-void *realloc(void *ptr, size_t size);
-
-char *getenv(const char *name);
-
-int abs(int j);
-long int labs(long int j);
-long long int llabs(long long int j);
-
-div_t div(int numer, int denom);
-ldiv_t ldiv(long int numer, long int denom);
-lldiv_t lldiv(long long int numer, long long int denom);
-
-#endif
+	return (j > 0) ? (j) : (-j);
+}
 
