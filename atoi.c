@@ -124,24 +124,3 @@ inline char * itoa(unsigned int value, char * str, int base)
     return itoa_ex(value, str, base, 0, 1);
 }
 
-/**
- *  @brief  parsers a ASCII coded integer into a integer value
- *  @param  str  input string
- *  @return integer value
- */
-
-int atoi(const char *str)
-{
-    int result = 0;
-    int length = 0;
-
-    while (isdigit(*str++))
-        ++length;
-
-    str -= length + 1;
-
-    while (length > 0)
-        result += powi(10, --length) * (*str++ - '0');
-
-    return result;
-}
