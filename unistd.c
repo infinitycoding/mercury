@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int write(int fd,void *buffer, size_t n)
+int write(int fd,const void *buffer, size_t n)
 {
     int ret = (int)linux_syscall(SYS_WRITE, fd, (uint32_t)buffer, n, 0, 0);
     return ret;

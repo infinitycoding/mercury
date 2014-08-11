@@ -1,22 +1,22 @@
 #ifndef STDIO_H
 #define STDIO_H
 /*
-	Copyright 2012 universe coding group (UCG) all rights reserved
-	This file is part of the Universe Kernel.
-
-	Universe Kernel is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	any later version.
-
-	Universe Kernel is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	You should have received a copy of the GNU General Public License
-	along with Universe Kernel.  If not, see <http://www.gnu.org/licenses/>.
-*/
+     Copyright 2012-2014 Infinitycoding all rights reserved
+     This file is part of the mercury c library.
+ 
+     The mercury c library is free software: you can redistribute it and/or modify
+     it under the terms of the GNU Lesser General Public License as published by
+     the Free Software Foundation, either version 3 of the License, or
+     any later version.
+ 
+     The mercury c library is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU Lesser General Public License for more details.
+ 
+     You should have received a copy of the GNU Lesser General Public License
+     along with the mercury c library.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include <stdint.h>
 #include <stdarg.h>
@@ -29,12 +29,11 @@
 #define STDIN 0
 #define STDOUT 1
 #define STDERR 2
+     
+#define EOF -1
+#define eof -1
 
-// printf
-int printf(const char *fmt, ...);
-int sprintf(char *buf, const char *fmt, ...);
-int vsprintf(char *buf, const char *fmt, va_list args);
-int getchar(void);
+
 
 // files
 typedef struct file
@@ -48,6 +47,16 @@ typedef struct file
     uint8_t buffincrement;
 } file_t;
 typedef struct file FILE;
+
+
+int rename(const char *oldname, const char *newname);
+
+
+// printf
+int printf(const char *fmt, ...);
+int sprintf(char *buf, const char *fmt, ...);
+int vsprintf(char *buf, const char *fmt, va_list args);
+int getchar(void);
 
 FILE *fopen(const char *path, char *modus);
 int fclose(FILE *file);

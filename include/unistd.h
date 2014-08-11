@@ -52,7 +52,7 @@ typedef struct dirent
 int open(const char *path, int file_access, int filemode);
 int close(int fd);
 int read(int fd, void *buffer,size_t n);
-int write(int fd,void *buffer, size_t n);
+int write(int fd,const void *buffer, size_t n);
 int lseek(int fd, int off, int whence);
 dirent_t *readdir(int fd);
 int chdir(const char *path);
