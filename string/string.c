@@ -1,19 +1,19 @@
 /*
      Copyright 2012-2014 Infinitycoding all rights reserved
-     This file is part of the Universe Kernel.
-
-     The Universe Kernel is free software: you can redistribute it and/or modify
-     it under the terms of the GNU General Public License as published by
+     This file is part of the mercury c-library.
+ 
+     The mercury c-library is free software: you can redistribute it and/or modify
+     it under the terms of the GNU Lesser General Public License as published by
      the Free Software Foundation, either version 3 of the License, or
      any later version.
-
-     The Universe Kernel is distributed in the hope that it will be useful,
+ 
+     The mercury c-library is distributed in the hope that it will be useful,
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     GNU General Public License for more details.
-
-     You should have received a copy of the GNU General Public License
-     along with the Universe Kernel. If not, see <http://www.gnu.org/licenses/>.
+     GNU Lesser General Public License for more details.
+ 
+     You should have received a copy of the GNU Lesser General Public License
+     along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
@@ -198,9 +198,10 @@ char *strchr(const char *str, int c)
     return NULL;
 }
 
+
 /**
  * @breif Searches for last occurrence of char c in str.
- * @param str string
+ * @param str string to be scanned
  * @param c searched character
  * @return pointer to the last similar char
  * NULL=no char in str is similar to c
@@ -222,13 +223,112 @@ char *strrchr(const char *str, int c)
 
 
 /**
-	TODO:
-	size_t strspn(const char* st0, const char* st1) {}
-	size_t strcspn(const char* st0, const char* st1) {}
-	char* strpbrk(const char* st0, const char* st1) {}
-	char* strstr(const char* st0, const char* st1) {}
-	char* strerror(size_t n) {}
-*/
+ * @breif Returns the position of the first occurrence of any character from str2 in str1. (except '\0')
+ * @param str1 string to be scanned
+ * @param str2 searched characters
+ * @return The position of the first occurrence in str1 or 0 if there is no occurence.
+ */
+size_t strcspn(const char *str1, const char *str2)
+{
+    size_t position = 0;
+    const char *p2;
+    while(str1[position])
+    {
+        p2 = str2;
+        while(*p2)
+        {
+            if(str1[position] == *p2++)
+                return position;
+        }
+
+        position++;
+    }
+    return 0;
+}
+
+
+/**
+ * @breif Returns a pointer to the first occurrence of any character from str2 in str1. (except '\0')
+ * @param str1 string to be scanned
+ * @param str2 searched characters
+ * @return Pointer to the first occurrence in str1 or a NULL pointer if there is no occurrence.
+ */
+char *strpbrk(const char  *str1, const char *str2)
+{
+    const char *p2;
+    while(*str1)
+    {
+        p2 = str2;
+        while(*p2)
+        {
+            if(*str1 == *p2++)
+                return (char *)str1;
+        }
+        ++str1;
+    }
+    return NULL;
+}
+
+
+/**
+ * @brief Returns a pointer to the first occurrence of str2 in str1.
+ * @param str1 string to be scanned
+ * @param str2 string to be found in str1
+ * @return Pointer to the first occurrence in str1 or a NULL pointer if there is no occurrence.
+ */
+char *strstr(const char *str1, const char *str2)
+{
+    const char * p1 = str1;
+    const char * p2;
+    while ( *str1 )
+    {
+        p2 = str2;
+        while ( *p2 && ( *p1 == *p2 ) )
+        {
+            ++p1;
+            ++p2;
+        }
+        if ( ! *p2 )
+        {
+            return (char *) str1;
+        }
+        ++str1;
+        p1 = str1;
+    }
+    return NULL;
+}
+
+
+/**
+ * @brief Returns the lengh of the initial segment of str1 which consists only of the charactes given in str2.
+ * @param str1 string to be scanned
+ * @param str2 containing the characters to match
+ * @return the lengh of the initial segment
+ */
+size_t strspn(const char * str1, const char * str2)
+{
+    size_t len = 0;
+    const char * p;
+    while ( str1[ len ] )
+    {
+        p = str2;
+        while ( *p )
+        {
+            if ( str1[len] == *p )
+            {
+                break;
+            }
+            ++p;
+        }
+        if ( ! *p )
+        {
+            return len;
+        }
+        ++len;
+    }
+    return len;
+}
+
 
 char *strtok(char *string, const char *delimiters)
 {
@@ -263,6 +363,7 @@ char *strtok(char *string, const char *delimiters)
     str = NULL;
     return ret;
 }
+
 
 /**
  * @brief Copies memory from source to destination.
@@ -363,11 +464,11 @@ void *memchr(const void *mem, int c, size_t n)
 
 
 /**
- * @brief Fill <code>mem</code> with value c.
+ * @brief Fill mem with value c.
  * @param mem Block of memory to fill.
  * @param c Value to be set. The function will use a unsigned char conversion of this value.
  * @param n size of mem.
- * @return returns <code>mem</code>.
+ * @return returns mem.
  */
 void *memset(void *mem, int c, size_t n)
 {

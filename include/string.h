@@ -1,40 +1,42 @@
 #ifndef	_string_h_
 #define	_string_h_
-#include "stdint.h"
 
 /*
-	Copyright 2012 universe coding group (UCG) all rights reserved
-	This file is part of the Universe Kernel.
+     Copyright 2012-2014 Infinitycoding all rights reserved
+     This file is part of the mercury c-library.
+ 
+     The mercury c-library is free software: you can redistribute it and/or modify
+     it under the terms of the GNU Lesser General Public License as published by
+     the Free Software Foundation, either version 3 of the License, or
+     any later version.
+ 
+     The mercury c-library is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU Lesser General Public License for more details.
+ 
+     You should have received a copy of the GNU Lesser General Public License
+     along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
-	Universe Kernel is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	any later version.
+typedef unsigned int size_t;
 
-	Universe Kernel is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+size_t strnlen(const char *s, size_t maxlen);
+size_t strlen(const char*);
+char* strcpy(char*,const char*);
+char* strncpy(char*,const char*,size_t);
+char* strcat(char*,const char*);
+char* strncat(char*,const char*,size_t);
+int strcmp(const char*,const char*);
+int strncmp(const char*,const char*,size_t);
+char* strchr(const char*,int);
+char* strrchr(const char*,int);
 
-	You should have received a copy of the GNU General Public License
-	along with Universe Kernel.  If not, see <http://www.gnu.org/licenses/>.
-*/
+size_t strspn(const char*,const char*);
+size_t strcspn(const char*,const char*);
+char* strpbrk(const char*,const char*);
+char* strstr(const char*,const char*);
 
-extern size_t strnlen(const char *s, size_t maxlen);
-extern size_t strlen(const char*);
-extern char* strcpy(char*,const char*);
-extern char* strncpy(char*,const char*,size_t);
-extern char* strcat(char*,const char*);
-extern char* strncat(char*,const char*,size_t);
-extern int strcmp(const char*,const char*);
-extern int strncmp(const char*,const char*,size_t);
-extern char* strchr(const char*,int);
-extern char* strrchr(const char*,int);
-
-//extern size_t strspn(const char*,const char*);
-//extern size_t strcspn(const char*,const char*);
-//extern char* strpbrk(const char*,const char*);
-//extern char* strstr(const char*,const char*);
 //extern char* strerror(size_t);
 
 extern char* strtok(char*,const char*);
