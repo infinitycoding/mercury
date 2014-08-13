@@ -21,36 +21,43 @@
 #include <stdint.h>
 #include <stddef.h>
 
+// Copy
+void *memcpy(void *destination, const void *source, size_t size);
+void *memmove(void *destination, const void *source, size_t num);
+void *memset(void *mem, int c, size_t n);
+char *strcpy(char *dest, const char *src);
+char *strncpy(char *dest, const char *src, size_t n);
+
+// Concatenation
+char *strcat(char *dest, const char *src);
+char *strncat(char *dest, const char *src, size_t n);
+
+// Comparison
+int memcmp(const void *mem0, const void *mem1, size_t n);
+int strncmp(const char *str0, const char *str1, size_t n);
+
+// Searching
+void *memchr(const void *mem, int c, size_t n);
+char *strchr(const char *str, int c);
+char *strrchr(const char *str, int c);
+size_t strspn(const char * str1, const char * str2);
+size_t strcspn(const char *str1, const char *str2);
+char *strpbrk(const char  *str1, const char *str2);
+char *strstr(const char *str1, const char *str2);
+char *strtok(char *string, const char *delimiters);
+
+// Length
 size_t strnlen(const char *s, size_t maxlen);
-size_t strlen(const char*);
-char* strcpy(char*,const char*);
-char* strncpy(char*,const char*,size_t);
-char* strcat(char*,const char*);
-char* strncat(char*,const char*,size_t);
-int strcmp(const char*,const char*);
-int strncmp(const char*,const char*,size_t);
-char* strchr(const char*,int);
-char* strrchr(const char*,int);
+size_t strlen(const char *);
 
-size_t strspn(const char*,const char*);
-size_t strcspn(const char*,const char*);
-char* strpbrk(const char*,const char*);
-char* strstr(const char*,const char*);
+//char *strerror(size_t);
 
-//extern char* strerror(size_t);
-
-extern char* strtok(char*,const char*);
-
-extern void* memcpy(void*,const void*,size_t);
-extern void* memmove(void*,const void*,size_t);
-extern int memcmp(const void*,const void*,size_t);
-extern void* memchr(const void*,int,size_t);
-extern void* memset(void*,int,size_t);
-
-extern void strev(char* output,char* input);
-extern void itodez(int zahl,char* output);
-extern void uitodez(uint32_t zahl,char* output);
-extern void itohex(int zahl,char* output);
-extern void uitohex(uint32_t zahl,char* output);
+// convert integers to string
+void strev(char *output, char *input);
+void itodez(int zahl, char *output);
+void uitodez(uint32_t zahl, char *output);
+void itohex(int zahl, char *output);
+void uitohex(uint32_t zahl, char *output);
 
 #endif
+

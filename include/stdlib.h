@@ -27,6 +27,9 @@
 
 #define NUM_PAGES(n) ((((n) + 0xfff) & 0xfffff000) / 4096)
 
+#define EXIT_SUCCESS 0
+#define EXIT_FAILURE -1
+
 typedef struct
 {
 	int quot;
