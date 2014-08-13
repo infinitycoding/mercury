@@ -23,6 +23,7 @@
 	@author Michael Sippel <micha@infinitycoding.de>
 */
 #include <stdint.h>
+#include <stddef.h>
 
 #define NUM_PAGES(n) ((((n) + 0xfff) & 0xfffff000) / 4096)
 

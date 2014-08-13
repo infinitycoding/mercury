@@ -20,9 +20,10 @@
  */
 
 /**
-	@author Michael Sippel <micha.linuxfreak@gmail.com>
+	@author Michael Sippel <micha@infinitycoding.de>
 */
 #include <stdint.h>
+#include <stddef.h>
 #include <sys/stat.h>
 
 #define R_OK 0x1

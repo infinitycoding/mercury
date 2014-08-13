@@ -25,6 +25,7 @@
 
 
 #include <stdint.h>
+#include <stdbool.h>	
 
 typedef int mutex;
 

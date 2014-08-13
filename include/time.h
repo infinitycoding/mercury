@@ -23,13 +23,10 @@
   @author Peter Hösch aka. BlitzBasic <phoesch@gmx.de>
 */
 
-
+#include <stddef.h>
 
 //#define CLOCKS_PER_SEC 1000
 
-#ifndef NULL
-#define NULL (void *) 0
-#endif
 
 // the following symbolic constants are not part of the standart implementation
 // they are only for intern use and universe-only programs
@@ -60,10 +57,7 @@
 
 typedef unsigned int time_t;
 typedef unsigned int clock_t;
-typedef unsigned int size_t;
 typedef unsigned int suseconds_t;
-
-
 
 struct tm
 {

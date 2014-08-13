@@ -21,6 +21,7 @@
 */
 
 #include <stdint.h>
+#include <stdbool.h>
 
 /**
  * check if c is an alphanumeric character (A-Z, a-z and 0-9)

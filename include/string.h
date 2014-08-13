@@ -18,8 +18,8 @@
      You should have received a copy of the GNU Lesser General Public License
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-typedef unsigned int size_t;
+#include <stdint.h>
+#include <stddef.h>
 
 size_t strnlen(const char *s, size_t maxlen);
 size_t strlen(const char*);
