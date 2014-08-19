@@ -17,17 +17,16 @@
  */
 
 /**
+ *  @file string/strcmp.c
  *  @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
  *  @author Johannes Spangenberg aka. JojOatXGME <jojo@xgme.de>
  */
 
-#include <stdint.h>
-#include <stddef.h>
-#include <stdbool.h>
+
 #include <string.h>
 
 
-/**
+ /**
  * @breif Compares two strings.
  * @param str0 string to be compared
  * @param str1 string to be compared
@@ -42,43 +41,3 @@ int strcmp(const char *str0, const char *str1)
     int ret = str0[i] - str1[i];
     return ret;
 }
-
-
-/**
- * @breif Compares n chars of two string untill the value of str0 and str1 is not zero.
- * @param str0 string to be compared
- * @param str1 string to be compared
- * @param numer of chars
- * @return = 0 strings are similar
- *  > 0 value of the first different char of string0 is bigger
- *  < 0 value of the first different char of string1 is bigger
- */
-int strncmp(const char *str0, const char *str1, size_t n)
-{
-    uint32_t i;
-    int ret = 0;
-
-    for (i = 0; str0[i] == str1[i] && str0[i] != 0 && i < n-1; i++);
-    ret = str0[i] - str1[i];
-    return ret;
-}
-
-
-/**
- * @brief Compares two memory areas.
- * @param mem0 first area
- * @param mem1 second area
- * @param n area size
- * @return = 0 areas are similar
- *  > 0 the value of the first different byte of area0 is bigger
- *  < 0 the value of the first different byte of area1 is bigger
- */
-int memcmp(const void *mem0, const void *mem1, size_t n)
-{
-    const char *st0 = mem0;
-    const char *st1 = mem1;
-    size_t i;
-    for (i = 0; st0[i] == st1[i] && i < n-1; i++);
-    return st0[i] - st1[i];
-}
-

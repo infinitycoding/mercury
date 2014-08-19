@@ -17,39 +17,41 @@
  */
 
 /**
+ *  @file string/strspn.c
  *  @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
  *  @author Johannes Spangenberg aka. JojOatXGME <jojo@xgme.de>
  */
 
-#include <stdint.h>
-#include <stddef.h>
-#include <stdbool.h>
+
 #include <string.h>
 
-/**
- * @brief Copies src string behind dest string.
- * @param dest destination string
- * @param src source string
- * @return destination string
- */
-char *strcat(char *dest, const char *src)
-{
-    size_t n = strlen(dest);
-    strcpy((char*)(dest+n),src);
-    return dest;
-}
 
 /**
- * @breif Copies n chars from src behind dest string untill *src=0.
- * @param dest destination string
- * @param src source string
- * @param n maximal number of chars
- * @return destination string
+ * @brief Returns the lengh of the initial segment of str1 which consists only of the charactes given in str2.
+ * @param str1 string to be scanned
+ * @param str2 containing the characters to match
+ * @return the lengh of the initial segment
  */
-char *strncat(char *dest, const char *src, size_t n)
+size_t strspn(const char * str1, const char * str2)
 {
-    size_t i = strlen(dest);
-    strncpy((char*)(dest+i),src,n);
-    return dest;
+    size_t len = 0;
+    const char * p;
+    while ( str1[ len ] )
+    {
+        p = str2;
+        while ( *p )
+        {
+            if ( str1[len] == *p )
+            {
+                break;
+            }
+            ++p;
+        }
+        if ( ! *p )
+        {
+            return len;
+        }
+        ++len;
+    }
+    return len;
 }
-
