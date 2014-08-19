@@ -1,6 +1,3 @@
-#ifndef _MUTEX_H_
-#define _MUTEX_H_
-
 /*
      Copyright 2012-2014 Infinitycoding all rights reserved
      This file is part of the mercury c-library.
@@ -20,21 +17,44 @@
  */
 
 /**
+ *  @file stdio/fgets.c
  *  @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
  */
 
-#include <features.h>
-#include <stdint.h>
-#include <stdbool.h>	
+#include <stdio.h>
 
-__BEGIN_DECLS
+/**
+ *  @brief Gets a "\n" terminated string from stream. 
+ *  @param str    pointer to a buffer for the sting
+ *  @param num    the maximal number of characters to be read.
+ *  @param stream the stream to be read.
+ *  @return Success = the same pointer as str, Failure at first character = NULL
+ */
+char * fgets(char *str, int num, FILE *stream)
+{
+    int i, c = 0;
+    for(i = 0; i < num; i++)
+    {
+        c = fgetc(stream);
+        if(c == EOF)
+        {
+            if(i == 0)
+                return NULL;
 
-typedef int mutex;
+            str[i] = 0;
+            break;
+        }
 
-void lock(mutex *m);
-void unlock(mutex *m);
-bool try_lock(mutex *m);
+        if(c == '\n')
+        {
+            str[i] = '\n';
+            str[i+1] = '0';
+            break;
+        }
 
-__END_DECLS
+        str[i] = (char) c;
 
-#endif
+    }
+
+    return str;
+}

@@ -29,6 +29,9 @@
 	@author Simon Diepold <simon.diepold@infinitycoding.de>
 */
 
+#include <features.h>
+
+__BEGIN_DECLS
 
 # define M_E		2.7182818284590452354	/* e */
 # define M_LOG2E	1.4426950408889634074	/* log_2 e */
@@ -81,5 +84,7 @@ int abs(int x);
 double ldexp(double x, double n);
 
 unsigned int bit_scan_forward(unsigned int);
+
+__END_DECLS
 
 #endif

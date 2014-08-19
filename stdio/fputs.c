@@ -1,6 +1,3 @@
-#ifndef _atoi_h_
-#define _atoi_h_
-
 /*
      Copyright 2012-2014 Infinitycoding all rights reserved
      This file is part of the mercury c-library.
@@ -20,26 +17,25 @@
  */
 
 /**
-	@author Tom Slawik <tom.slawik@gmail.com>
-*/
+ *  @file stdio/fputs.c
+ *  @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
+ */
 
-#include <features.h>
-#include <stdint.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
 
-__BEGIN_DECLS 
-
-#define ZEROPAD 1
-#define SIGN	2
-#define PLUS	4
-#define SPACE	8
-#define LEFT	16
-#define SMALL	32
-#define SPECIAL	64
-
-extern char * itoa_ex(unsigned int value, char * str, int base, int flags, int width);
-extern inline char * itoa(unsigned int value, char * str, int base);
-extern int atoi(const char *str);
-
-__END_DECLS 
-
-#endif
+/**
+ *  @brief Writes a string into a stream.
+ *  @param str    string to be written.
+ *  @param stream
+ *  @return Success = number of written characters, Failure = EOF (-1)
+ */
+int fputs(const char * str, FILE * stream)
+{
+    size_t len = strlen(str);
+    int r = write(stream->handle, str, len);
+    if(r)
+        return r;
+    return EOF;
+}

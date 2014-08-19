@@ -22,9 +22,12 @@
 /**
 	@author Michael Sippel <micha@infinitycoding.de>
 */
+#include <features.h>
 #include <stdint.h>
 #include <stddef.h>
 #include <sys/stat.h>
+
+__BEGIN_DECLS
 
 #define R_OK 0x1
 #define W_OK 0x2
@@ -61,6 +64,8 @@ char *getcwd(char *buf, int buflen);
 
 int mknod(char *path, int mode, int dev);
 int mkfifo(char *path, int mode);
+
+__END_DECLS
 
 #endif
 

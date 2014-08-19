@@ -19,9 +19,13 @@
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <features.h>
 #include <stdint.h>
 #include <stdarg.h>
 #include <unistd.h>
+
+
+__BEGIN_DECLS
 
 #define stdin 0
 #define stdout 1
@@ -63,9 +67,16 @@ FILE *fopen(const char *path, char *modus);
 int fclose(FILE *file);
 size_t fread(void *buf, size_t size, size_t n, FILE *file);
 size_t fwrite(void *buf, size_t size, size_t n, FILE *file);
-void fseek(FILE *file, int off, int whence);
-int ftell(FILE *file);
+void fseek(FILE *file,long int off, int whence);
+long int ftell(FILE *file);
 int fstat(int fildes, struct stat *buf);
+int fflush ( FILE *stream);
+int fgetc(FILE *stream);
+char * fgets(char *str, int num, FILE *stream);
+int fputc(int character, FILE * stream);
+int fputs(const char * str, FILE * stream);
+
+__END_DECLS
 
 #endif
 

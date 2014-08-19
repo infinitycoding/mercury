@@ -2,7 +2,7 @@ SRCS = $(shell find -name '*.c')
 SRCS += $(shell find -name '*.asm')
 OBJS = $(addsuffix .o,$(basename $(SRCS)))
 
-L_CFLAGS = -m32 -Wall -g -nostdinc -fno-stack-protector -fno-builtin -fno-builtin-log -Wimplicit-function-declaration -nostdinc -I include
+L_CFLAGS = -m32 -Wall -fno-stack-protector -fno-builtin -fno-builtin-log -Wimplicit-function-declaration -nostdinc -I include
 ASFLAGS =-felf32
 
 

@@ -18,8 +18,12 @@
      You should have received a copy of the GNU Lesser General Public License
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#include <features.h>
 #include <stdint.h>
 #include <stddef.h>
+
+__BEGIN_DECLS
 
 // Copy
 void *memcpy(void *destination, const void *source, size_t size);
@@ -58,6 +62,8 @@ void itodez(int zahl, char *output);
 void uitodez(uint32_t zahl, char *output);
 void itohex(int zahl, char *output);
 void uitohex(uint32_t zahl, char *output);
+
+__END_DECLS
 
 #endif
 

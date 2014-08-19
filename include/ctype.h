@@ -19,20 +19,24 @@
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <features.h>
 
+__BEGIN_DECLS 
 
-extern int isalnum(int);
-extern int isalpha(int);
-extern int iscntrl(int);
-extern int isdigit(int);
-extern int isgraph(int);
-extern int islower(int);
-extern int isprint(int);
-extern int ispunct(int);
-extern int isspace(int);
-extern int isupper(int);
-extern int isxdigit(int);
-extern int tolower(int);
-extern int toupper(int);
+int isalnum(int);
+int isalpha(int);
+int iscntrl(int);
+int isdigit(int);
+int isgraph(int);
+int islower(int);
+int isprint(int);
+int ispunct(int);
+int isspace(int);
+int isupper(int);
+int isxdigit(int);
+int tolower(int);
+int toupper(int);
+
+__END_DECLS
 
 #endif

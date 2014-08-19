@@ -24,7 +24,10 @@
  *  @copyright GNU Lesser Public License
  */
 
+#include <features.h>
 #include <mutex.h>
+
+__BEGIN_DECLS
 
 struct list_node
 {
@@ -67,5 +70,8 @@ void list_previous(iterator_t *it);
 bool list_is_last(iterator_t *it);
 void list_set_first(iterator_t *it);
 void *list_remove(iterator_t *it);
+
+
+__END_DECLS
 
 #endif

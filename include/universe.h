@@ -19,8 +19,11 @@
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <features.h>
 #include <stdint.h>
 #include <stdarg.h>
+
+__BEGIN_DECLS
 
 // Linux Syscalls
 #define SYS_EXIT        1
@@ -144,6 +147,8 @@ void thread_exit(int retv);
 uint32_t identify_universe(void);
 #define UNIVERSE_OS ('u' | ('n' << 8) | ('i' << 16))
 void thread_launch(void * function, int argc, void *argv);
+
+__END_DECLS
 
 #endif
 

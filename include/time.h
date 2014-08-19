@@ -23,7 +23,10 @@
   @author Peter Hösch aka. BlitzBasic <phoesch@gmx.de>
 */
 
+#include <features.h>
 #include <stddef.h>
+
+__BEGIN_DECLS
 
 //#define CLOCKS_PER_SEC 1000
 
@@ -144,5 +147,7 @@ int validtm(const struct tm *timer);		// checks if the given struct tm is valid
 int validtimestamp(const time_t *timer);	// checks if the given unix timestamp is valid
 struct tm *gmtolocal(struct tm *timer);		// converts a time given in greenwitch time to the local time
 int gettimeofday(struct timeval *tp,struct timezone *tzp);
+
+__END_DECLS
 
 #endif

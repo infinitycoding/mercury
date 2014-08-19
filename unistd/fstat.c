@@ -1,6 +1,3 @@
-#ifndef _atoi_h_
-#define _atoi_h_
-
 /*
      Copyright 2012-2014 Infinitycoding all rights reserved
      This file is part of the mercury c-library.
@@ -20,26 +17,16 @@
  */
 
 /**
-	@author Tom Slawik <tom.slawik@gmail.com>
-*/
+ *  @file unistd/fstat.c
+ *  @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
+ */
 
-#include <features.h>
-#include <stdint.h>
+#include <universe.h>
+#include <unistd.h>
 
-__BEGIN_DECLS 
 
-#define ZEROPAD 1
-#define SIGN	2
-#define PLUS	4
-#define SPACE	8
-#define LEFT	16
-#define SMALL	32
-#define SPECIAL	64
 
-extern char * itoa_ex(unsigned int value, char * str, int base, int flags, int width);
-extern inline char * itoa(unsigned int value, char * str, int base);
-extern int atoi(const char *str);
-
-__END_DECLS 
-
-#endif
+int fstat(int fildesc, struct stat *buf)
+{
+    return linux_syscall(SYS_FSTAT, fildesc, (uint32_t) buf, 0, 0, 0);
+}

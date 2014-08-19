@@ -22,8 +22,13 @@
 /**
 	@author Michael Sippel <micha@infinitycoding.de>
 */
+
+#include <features.h>
 #include <stdint.h>
 #include <stddef.h>
+
+
+__BEGIN_DECLS
 
 #define NUM_PAGES(n) ((((n) + 0xfff) & 0xfffff000) / 4096)
 
@@ -71,6 +76,8 @@ long long int llabs(long long int j);
 div_t div(int numer, int denom);
 ldiv_t ldiv(long int numer, long int denom);
 lldiv_t lldiv(long long int numer, long long int denom);
+
+__END_DECLS
 
 #endif
 

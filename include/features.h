@@ -1,5 +1,6 @@
-#ifndef _atoi_h_
-#define _atoi_h_
+
+#ifndef _features_h_
+#define _features_h_
 
 /*
      Copyright 2012-2014 Infinitycoding all rights reserved
@@ -19,27 +20,16 @@
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
-	@author Tom Slawik <tom.slawik@gmail.com>
-*/
 
-#include <features.h>
-#include <stdint.h>
 
-__BEGIN_DECLS 
+#ifdef    __cplusplus
+     #define __BEGIN_DECLS   extern "C" {
+     #define __END_DECLS     }
+#else
+     #define __BEGIN_DECLS
+     #define __END_DECLS
+#endif
 
-#define ZEROPAD 1
-#define SIGN	2
-#define PLUS	4
-#define SPACE	8
-#define LEFT	16
-#define SMALL	32
-#define SPECIAL	64
 
-extern char * itoa_ex(unsigned int value, char * str, int base, int flags, int width);
-extern inline char * itoa(unsigned int value, char * str, int base);
-extern int atoi(const char *str);
-
-__END_DECLS 
 
 #endif
