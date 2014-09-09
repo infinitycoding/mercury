@@ -10,17 +10,15 @@ ASM = nasm
 LD = i686-universe-ld
 
 install: all
-	cp -R crt/*.o $(PREFIX)/usr/lib/
+	cp -R ./crt/*.o $(PREFIX)/usr/lib/	
 	cp -R ./include/* $(PREFIX)/usr/include
 	cp libc.a $(PREFIX)/usr/lib/
 
 all: libc.a
+	${ASM} ${ASFLAGS} -o crt/crt0.o crt/crt0.asm 
 
 libc.a: $(OBJS)
 	@ar -rcs $@ $^
-
-%.o: %.asm
-	${ASM} ${ASFLAGS} -o $@ $^
 
 %.o: %.c
 	$(CC) ${CFLAGS} $(L_CFLAGS) -c -o $@ $^
