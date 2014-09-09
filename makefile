@@ -1,5 +1,4 @@
 SRCS = $(shell find -name '*.c')
-SRCS += $(shell find -name '*.asm')
 OBJS = $(addsuffix .o,$(basename $(SRCS)))
 
 L_CFLAGS = -m32 -Wall -fno-stack-protector -fno-builtin -fno-builtin-log -Wimplicit-function-declaration -nostdinc -I include
@@ -11,6 +10,7 @@ ASM = nasm
 LD = i686-universe-ld
 
 install: all
+	cp -R crt/*.o $(PREFIX)/usr/lib/
 	cp -R ./include/* $(PREFIX)/usr/include
 	cp libc.a $(PREFIX)/usr/lib/
 
