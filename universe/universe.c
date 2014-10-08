@@ -26,6 +26,13 @@ uint32_t fork()
     return pid;
 }
 
+uint32_t execve(const char *filename, char **argv, char **envp)
+{
+    uint32_t ret;
+    asm volatile("int $128;": "=a"(ret) : "a" (SYS_EXECVE), "b" (filename), "c" (argv), "d" (envp));
+    return ret;
+}
+
 // universe stuff
 
 void thread_exit(int retv)
