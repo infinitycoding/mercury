@@ -20,13 +20,14 @@
  */
 
 /**
-	@author Michael Sippel <micha.linuxfreak@gmail.com>
+	@author Michael Sippel <micha@infinitycoding.de>
 */
 
 #include <stdint.h>
 
 typedef unsigned int ino_t;
 typedef unsigned int id_t;
+typedef unsigned int pid_t;	
 typedef unsigned int uid_t;
 typedef unsigned int gid_t;
 typedef unsigned int mode_t;
