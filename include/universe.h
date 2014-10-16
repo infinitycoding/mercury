@@ -147,7 +147,9 @@ uint32_t alloc_memory(int pages);
 void thread_exit(int retv);
 uint32_t identify_universe(void);
 #define UNIVERSE_OS ('u' | ('n' << 8) | ('i' << 16))
-void thread_launch(void * function, int argc, void *argv);
+void thread_launch(void * function);
+void thread_launchv(void * function, char **argv);
+void thread_launchve(void * function, char **argv, char **envp);
 
 __END_DECLS
 

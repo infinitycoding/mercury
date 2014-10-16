@@ -40,9 +40,20 @@ void thread_exit(int retv)
     asm volatile("int $112;": : "a" (SYS_THREAD_EXIT) , "b"(retv));
 }
 
-void thread_launch(void * function, int argc, void *argv)
+extern char** environ;
+
+void thread_launch(void * function)
 {
-    asm volatile("pushl %%ebx; int $112; popl %%ebx;": : "a"(SYS_THREAD_LAUNCH) , "b"(function), "c"(argc), "d" (argv), "S" (&thread_exit));
+    asm volatile("pushl %%ebx; int $112; popl %%ebx;": : "a"(SYS_THREAD_LAUNCH) , "b"(function), "c" (0), "d"(environ),"S" (&thread_exit));
+}
+
+void thread_launchv(void * function, char **argv)
+{
+    asm volatile("pushl %%ebx; int $112; popl %%ebx;": : "a"(SYS_THREAD_LAUNCH) , "b"(function), "c" (argv), "d"(environ),"S" (&thread_exit));
+}
+void thread_launchve(void * function, char **argv, char **envp)
+{
+    asm volatile("pushl %%ebx; int $112; popl %%ebx;": : "a"(SYS_THREAD_LAUNCH) , "b"(function), "c" (argv), "d"(envp),"S" (&thread_exit));
 }
 
 uint32_t alloc_memory(int pages)
