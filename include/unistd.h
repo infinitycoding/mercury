@@ -58,7 +58,7 @@ int close(int fd);
 int read(int fd, void *buffer,size_t n);
 int write(int fd,const void *buffer, size_t n);
 int lseek(int fd, int off, int whence);
-dirent_t *readdir(int fd);
+dirent_t *readdir(int fd, dirent_t *dir);
 int chdir(const char *path);
 char *getcwd(char *buf, int buflen);
 
