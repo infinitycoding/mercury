@@ -119,6 +119,10 @@ static inline uint32_t linux_syscall(uint32_t function, uint32_t ebx, uint32_t e
 #define SYS_ALLOC_MEMORY 2
 #define SYS_IDENTIFY_UNIVERSE 3
 #define SYS_PIPE_TRIGGER 4
+#define SYS_OPEN_PORT 5
+#define SYS_CLOSE_PORT 6
+#define SYS_CONNECT 7
+#define SYS_NAME2PID 8
 
 static inline uint32_t universe_syscall(uint32_t function, uint32_t ebx, uint32_t ecx, uint32_t edx, uint32_t esi, uint32_t edi)
 {

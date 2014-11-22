@@ -68,4 +68,13 @@ uint32_t identify_universe(void)
     return universe_syscall(SYS_IDENTIFY_UNIVERSE,0,0,0,0,0);
 }
 
+int open_port(int port)
+{
+    return universe_syscall(SYS_OPEN_PORT, port, 0,0,0,0);
+}
+
+int close_port(int port)
+{
+    return universe_syscall(SYS_CLOSE_PORT, port, 0,0,0,0);
+}
 
