@@ -17,7 +17,8 @@
  */
 
 #include <universe.h>
-
+#include <sys/stat.h>
+#include <unistd.h>
 
 uint32_t fork()
 {
@@ -68,13 +69,24 @@ uint32_t identify_universe(void)
     return universe_syscall(SYS_IDENTIFY_UNIVERSE,0,0,0,0,0);
 }
 
+
+// socket port stuff TODO:extra files!!
+char *port_str(int port)
+{
+	char str[32];
+    int pid = getpid();
+	sprintf(str, "/proc/%d/socket/%d", pid, port);
+	printf("creat %s\n",str);
+	return str;
+}
+
 int open_port(int port)
 {
-    return universe_syscall(SYS_OPEN_PORT, port, 0,0,0,0);
+	return mkdir(port_str(port), S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 }
 
 int close_port(int port)
 {
-    return universe_syscall(SYS_CLOSE_PORT, port, 0,0,0,0);
+	return rmdir(port_str(port));
 }
 

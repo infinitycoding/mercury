@@ -24,7 +24,6 @@
 */
 
 #include <stdint.h>
-#include <unistd.h>
 #include <sys/types.h>
 
 #define S_IFMT  0x01 // type of file
@@ -76,5 +75,8 @@ struct stat
     long	st_blksize;
     long	st_blocks;
 };
+
+int mkdir(const char *pathname, mode_t mode);
+int rmdir(const char *pathname);
 
 #endif

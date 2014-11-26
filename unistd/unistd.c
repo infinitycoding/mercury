@@ -24,6 +24,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
 
 int write(int fd,const void *buffer, size_t n)
 {
@@ -91,4 +92,20 @@ int mkfifo(char *path, int mode)
 {
     return mknod(path, S_IFIFO | S_IRUSR | S_IWUSR | S_IXUSR | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH, 0);
 }
+
+int mkdir(const char *pathname, mode_t mode)
+{
+	return (int) linux_syscall(SYS_MKDIR, pathname, mode, 0, 0, 0);
+}
+
+int rmdir(const char *pathname)
+{
+	return (int) linux_syscall(SYS_RMDIR, pathname, 0, 0, 0, 0);
+}
+
+pid_t getpid(void)
+{
+	return (pid_t) linux_syscall(SYS_GETPID, 0, 0, 0, 0, 0);
+}
+
 
