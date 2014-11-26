@@ -39,6 +39,7 @@ char *strncat(char *dest, const char *src, size_t n);
 // Comparison
 int memcmp(const void *mem0, const void *mem1, size_t n);
 int strncmp(const char *str0, const char *str1, size_t n);
+int strcmp(const char *str0, const char *str1);
 
 // Searching
 void *memchr(const void *mem, int c, size_t n);
