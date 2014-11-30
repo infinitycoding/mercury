@@ -71,13 +71,13 @@ uint32_t identify_universe(void)
 
 
 // socket port stuff TODO:extra files!!
+static char pstr[32];
 char *port_str(int port)
 {
-	char str[32];
     int pid = getpid();
-	sprintf(str, "/proc/%d/socket/%d", pid, port);
-	printf("creat %s\n",str);
-	return str;
+	sprintf(pstr, "/proc/%d/socket/%d", pid, port);
+
+	return &pstr;
 }
 
 int open_port(int port)
