@@ -18,6 +18,7 @@
 
 #include <universe.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 uint32_t fork()
@@ -88,5 +89,10 @@ int open_port(int port)
 int close_port(int port)
 {
 	return rmdir(port_str(port));
+}
+
+int uconnect(pid_t pid, int port)
+{
+	return (int)universe_syscall(SYS_UCONNECT,pid,port,0,0,0);
 }
 

@@ -22,6 +22,7 @@
 #include <features.h>
 #include <stdint.h>
 #include <stdarg.h>
+#include <sys/types.h>
 
 __BEGIN_DECLS
 
@@ -119,7 +120,7 @@ static inline uint32_t linux_syscall(uint32_t function, uint32_t ebx, uint32_t e
 #define SYS_ALLOC_MEMORY 2
 #define SYS_IDENTIFY_UNIVERSE 3
 #define SYS_PIPE_TRIGGER 4
-#define SYS_CONNECT 5
+#define SYS_UCONNECT 5
 #define SYS_NAME2PID 6
 
 static inline uint32_t universe_syscall(uint32_t function, uint32_t ebx, uint32_t ecx, uint32_t edx, uint32_t esi, uint32_t edi)
@@ -155,7 +156,7 @@ void thread_launchve(void * function, char **argv, char **envp);
 
 int open_port(int port);
 int close_port(int port);
-int connect(int pid, int port);
+int uconnect(pid_t pid, int port);
 
 __END_DECLS
 
