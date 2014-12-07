@@ -61,6 +61,7 @@ int lseek(int fd, int off, int whence);
 dirent_t *readdir(int fd, dirent_t *dir);
 int chdir(const char *path);
 char *getcwd(char *buf, int buflen);
+int access(const char *path, int mode);
 
 int mknod(char *path, int mode, int dev);
 int mkfifo(char *path, int mode);

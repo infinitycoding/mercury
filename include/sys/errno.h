@@ -24,7 +24,7 @@
 #define ENOENT       2  /* No such file or directory */
 #define ESRCH        3  /* No such process */
 #define EINTR        4  /* Interrupted system call */
-#define EIO      5  /* I/O error */
+#define EIO      	 5  /* I/O error */
 #define ENXIO        6  /* No such device or address */
 #define E2BIG        7  /* Argument list too long */
 #define ENOEXEC      8  /* Exec format error */
@@ -54,5 +54,9 @@
 #define EPIPE       32  /* Broken pipe */
 #define EDOM        33  /* Math argument out of domain of func */
 #define ERANGE      34  /* Math result not representable */
+
+#ifndef _error_c_
+	extern int errno;
+#endif
 
 #endif
