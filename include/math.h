@@ -31,7 +31,6 @@
 
 #include <features.h>
 
-__BEGIN_DECLS
 
 # define M_E		2.7182818284590452354	/* e */
 # define M_LOG2E	1.4426950408889634074	/* log_2 e */
@@ -63,25 +62,30 @@ __BEGIN_DECLS
 
 #define MATH_PRECISION 20
 
+__BEGIN_DECLS
 
 double sin(double x);
 double cos(double x);
 double tan(double x);
 
+
 double exp(double x);
+double ldexp(double x, double n);
+
 double log(double y);
+
 double pow(double base, double exp);
-
-
 int powi(int base, int exponent);
-double inline factorial(long n);
+
+double factorial(long n);
+
 double floor(double x);
 double ceil(double x);
 double sqrt(double x);
 
 double fabs(double x);
 int abs(int x);
-double ldexp(double x, double n);
+
 
 unsigned int bit_scan_forward(unsigned int);
 
