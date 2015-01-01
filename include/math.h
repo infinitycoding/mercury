@@ -89,6 +89,10 @@ int abs(int x);
 
 unsigned int bit_scan_forward(unsigned int);
 
+double tanh(double x);
+double cosh(double x);
+double sinh(double x);
+
 __END_DECLS
 
 #endif

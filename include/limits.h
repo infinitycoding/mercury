@@ -19,21 +19,52 @@
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define INT8_MIN -128
-#define INT8_MAX 127
-#define UINT8_MAX 255
 
-#define INT16_MIN -32768
-#define INT16_MAX 32767
-#define UINT16_MAX 65535
+// Chars
+#define CHAR_BIT 	8
 
-#define INT32_MIN ((int32_t) -0x80000000)
-#define INT32_MAX 0x7FFFFFFF
-#define UINT32_MAX 0xFFFFFFFF
+#define SCHAR_MIN 	-128
+#define SCHAR_MAX 	127
+#define UCHAR_MAX 	255
+#define CHAR_MIN 	UCHAR_MIN
+#define CHAR_MAX 	UCHAR_MAX
 
-#define INT64_MIN ((int64_t) -0x8000000000000000LL)
-#define INT64_MAX 0x7FFFFFFFFFFFFFFFLL
-#define UINT64_MAX ((uint64_t) -1ULL)
+#define INT8_MIN	SCHAR_MIN
+#define INT8_MAX  	SCHAR_MAX
+#define UINT8_MAX 	UCHAR_MAX
+
+// shorts
+#define SHRT_MAX	32767
+#define SHRT_MIN	-32768
+#define USHRT_MAX	65535
+
+#define INT16_MIN	SHRT_MIN
+#define INT16_MAX	SHRT_MAX
+#define UINT16_MAX	USHRT_MAX
+
+
+//ints
+#define INT_MIN		-2147483648
+#define INT_MAX		2147483647
+#define UINT_MAX	0xFFFFFFFF
+
+#define INT32_MIN 	INT_MIN
+#define INT32_MAX 	INT_MAX
+#define UINT32_MAX 	UINT_MAX
+
+#define LONG_MIN	INT_MIN
+#define LONG_MAX	INT_MAX
+#define ULONG_MAX	UINT_MAX
+
+//long longs
+#define LLONG_MIN	((int64_t) -0x8000000000000000LL)
+#define LLONG_MAX	0x7FFFFFFFFFFFFFFFLL
+#define ULLONG_MAX	((uint64_t) -1ULL)
+
+#define INT64_MIN	LLONG_MIN
+#define INT64_MAX	LLONG_MAX
+#define UINT64_MAX	ULLONG_MAX
+
 
 #define INTPTR_MIN INT32_MIN
 #define INTPTR_MAX INT32_MAX

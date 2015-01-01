@@ -1,7 +1,3 @@
-
-#ifndef _features_h_
-#define _features_h_
-
 /*
      Copyright 2012-2014 Infinitycoding all rights reserved
      This file is part of the mercury c-library.
@@ -21,17 +17,20 @@
  */
 
 
+/**
+ *  @file math/cosh.c
+ *  @author Simon Diepold aka. tdotu <simon.diepold@Infinitycoding.de>
+ */
 
-#ifdef    __cplusplus
-     #define __BEGIN_DECLS   extern "C" {
-     #define __END_DECLS     }
-#else
-     #define __BEGIN_DECLS
-     #define __END_DECLS
-#endif
-
-
-#define offsetof(type, member) ((size_t)(&((type *)0)->member))
-
-
-#endif
+#include <math.h>
+ 
+/**
+ * @brief calculates the hypobolic cosine of x
+ * @param x
+ * @return cosh(x)
+ */
+double cosh(double x)
+{
+	double y = exp(x);
+	return (y + 1./y)*0.5;
+}

@@ -1,7 +1,3 @@
-
-#ifndef _features_h_
-#define _features_h_
-
 /*
      Copyright 2012-2014 Infinitycoding all rights reserved
      This file is part of the mercury c-library.
@@ -21,17 +17,20 @@
  */
 
 
+/**
+ *  @file math/tanh.c
+ *  @author Simon Diepold aka. tdotu <simon.diepold@Infinitycoding.de>
+ */
 
-#ifdef    __cplusplus
-     #define __BEGIN_DECLS   extern "C" {
-     #define __END_DECLS     }
-#else
-     #define __BEGIN_DECLS
-     #define __END_DECLS
-#endif
+#include <math.h>
 
-
-#define offsetof(type, member) ((size_t)(&((type *)0)->member))
-
-
-#endif
+/**
+ * @brief calculates the hypobolic tangent of x
+ * @param x
+ * @return tanh(x)
+ */
+double tanh (double x)
+{
+    double  y = exp (x + x);
+    return (y - 1.) / (y + 1.);
+} 

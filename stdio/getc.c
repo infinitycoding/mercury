@@ -1,7 +1,3 @@
-
-#ifndef _features_h_
-#define _features_h_
-
 /*
      Copyright 2012-2014 Infinitycoding all rights reserved
      This file is part of the mercury c-library.
@@ -20,18 +16,25 @@
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ *  @file stdio/getc.c
+ *  @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
+ */
 
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/stat.h>
 
-#ifdef    __cplusplus
-     #define __BEGIN_DECLS   extern "C" {
-     #define __END_DECLS     }
-#else
-     #define __BEGIN_DECLS
-     #define __END_DECLS
-#endif
-
-
-#define offsetof(type, member) ((size_t)(&((type *)0)->member))
-
-
-#endif
+/**
+ *  @brief Returns the next character form stream.
+ *  @param stream The stream to be read.
+ *  @return Success = character from stream, Failure = EOF (-1)
+ */
+int getc(FILE *stream)
+{
+    int c = 0;
+    if(read(stream->handle, &c, 1) == EOF)
+        return EOF;
+    else
+        return c;
+}
