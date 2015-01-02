@@ -39,6 +39,10 @@ __BEGIN_DECLS
 #define eof -1
 
 
+#define _IONBF 0
+#define _IOLBF 1
+#define _IOFBF 2
+
 
 // files
 typedef struct file

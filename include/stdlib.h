@@ -23,6 +23,7 @@
 	@author Michael Sippel <micha@infinitycoding.de>
 */
 
+#include <limits.h>
 #include <features.h>
 #include <stdint.h>
 #include <stddef.h>
@@ -34,6 +35,8 @@ __BEGIN_DECLS
 
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE -1
+
+#define RAND_MAX  INT_MAX
 
 typedef struct
 {

@@ -61,6 +61,7 @@
 # define M_SQRT1_2l	0.7071067811865475244008443621048490L  /* 1/sqrt(2) */
 
 #define MATH_PRECISION 20
+# define HUGE_VAL	(__builtin_huge_val())
 
 __BEGIN_DECLS
 
@@ -71,8 +72,10 @@ double tan(double x);
 
 double exp(double x);
 double ldexp(double x, double n);
+double frexp (double x, int* exp);
 
 double log(double y);
+double log10 (double x);
 
 double pow(double base, double exp);
 int powi(int base, int exponent);
@@ -86,6 +89,8 @@ double sqrt(double x);
 double fabs(double x);
 int abs(int x);
 
+double fmod(double numer, double denom);
+double modf(double x, double *intpart);
 
 unsigned int bit_scan_forward(unsigned int);
 
