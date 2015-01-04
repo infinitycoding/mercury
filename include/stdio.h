@@ -43,6 +43,9 @@ __BEGIN_DECLS
 #define _IOLBF 1
 #define _IOFBF 2
 
+#define BUFSIZ 1024
+
+
 
 // files
 typedef struct file
@@ -79,6 +82,7 @@ int fgetc(FILE *stream);
 char * fgets(char *str, int num, FILE *stream);
 int fputc(int character, FILE * stream);
 int fputs(const char * str, FILE * stream);
+int getc(FILE *stream);
 
 __END_DECLS
 
