@@ -1,17 +1,17 @@
 /*
      Copyright 2012-2014 Infinitycoding all rights reserved
      This file is part of the mercury c-library.
- 
+
      The mercury c-library is free software: you can redistribute it and/or modify
      it under the terms of the GNU Lesser General Public License as published by
      the Free Software Foundation, either version 3 of the License, or
      any later version.
- 
+
      The mercury c-library is distributed in the hope that it will be useful,
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
      GNU Lesser General Public License for more details.
- 
+
      You should have received a copy of the GNU Lesser General Public License
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -76,34 +76,34 @@ static char pstr[32];
 char *port_str(int port)
 {
     int pid = getpid();
-	sprintf(pstr, "/proc/%d/socket/%d", pid, port);
+    sprintf(pstr, "/proc/%d/socket/%d", pid, port);
 
-	return &pstr;
+    return &pstr;
 }
 
 int open_port(int port)
 {
-	return mkdir(port_str(port), S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    return mkdir(port_str(port), S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 }
 
 int close_port(int port)
 {
-	return rmdir(port_str(port));
+    return rmdir(port_str(port));
 }
 
 int uconnect(pid_t pid, int port)
 {
-	return (int)universe_syscall(USYS_CONNECT,pid,port,0,0,0);
+    return (int)universe_syscall(USYS_CONNECT,pid,port,0,0,0);
 }
 
 int uread_port(int port)
 {
-	return (int)universe_syscall(USYS_READPORT,port,0,0,0,0);
+    return (int)universe_syscall(USYS_READPORT,port,0,0,0,0);
 }
 
 int uaccept(int req_id)
 {
-	return (int)universe_syscall(USYS_ACCEPT,req_id,0,0,0,0);
+    return (int)universe_syscall(USYS_ACCEPT,req_id,0,0,0,0);
 }
 
 

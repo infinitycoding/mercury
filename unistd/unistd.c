@@ -95,17 +95,17 @@ int mkfifo(char *path, int mode)
 
 int mkdir(const char *pathname, mode_t mode)
 {
-	return (int) linux_syscall(SYS_MKDIR, (uint32_t)pathname, mode, 0, 0, 0);
+    return (int) linux_syscall(SYS_MKDIR, (uint32_t)pathname, mode, 0, 0, 0);
 }
 
 int rmdir(const char *pathname)
 {
-	return (int) linux_syscall(SYS_RMDIR, (uint32_t)pathname, 0, 0, 0, 0);
+    return (int) linux_syscall(SYS_RMDIR, (uint32_t)pathname, 0, 0, 0, 0);
 }
 
 pid_t getpid(void)
 {
-	return (pid_t) linux_syscall(SYS_GETPID, 0, 0, 0, 0, 0);
+    return (pid_t) linux_syscall(SYS_GETPID, 0, 0, 0, 0, 0);
 }
 
 
