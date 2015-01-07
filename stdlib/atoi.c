@@ -17,41 +17,110 @@
  */
 
 /**
-	@author Michael Sippel (Universe Team) <micha@infinitycoding.de>
+	@author Tom Slawik <tom.slawik@gmail.com>
 */
-#include <universe.h>
-#include <stdlib.h>
 
-int atoi(const char *nptr) {
-    int num = 0;
+#include <atoi.h>
+#include <math.h>
+#include <ctype.h>
+/*
+	TODO: Make it compatible with both unsigned int and signed int
+	TODO: implement 64-bit values
+	TODO: Implement floating point values
+*/
 
-    while(*nptr) {
-        num *= 10;
-        num += *nptr++ - '0';
+/**
+ *  @brief makes string from number
+ *  @param value 	Input Number
+ *  @param str 	Output Buffer
+ *  @param base 	Number base (e.g. 2, 8, 10, 16)
+ *  @param flags 	SMALL: hexadecimal chars no caps, LEFT: number left aligned, ZEROPAD: Fill with zeroes, PLUS: + sign if positive, SPECIAL: 0x (hex)
+ *  @param width 	Field width
+ *  @return pointer to buffer
+ */
+
+char * itoa_ex(unsigned int value, char * str, int base, int flags, int width)
+{
+    char *result = str;
+    unsigned int size;
+    unsigned int len = 0;
+    unsigned int temp = 0;
+    int negative = 0;
+
+    const char *digits = "0123456789ABCDEF";
+
+    if (flags & SMALL)
+    {
+        digits = "0123456789abcdef";
     }
 
-    return num;
+    if (value < 0)
+    {
+        value = - value;
+        ++negative;
+    }
+
+    temp = value;
+    do
+    {
+        temp /= base;
+        ++len;
+    }
+    while (temp);
+    size = len;
+
+    if (!(flags & LEFT) && !(flags & ZEROPAD))
+        while (size < width--)
+            *str++ = ' ';
+
+    if (negative)
+    {
+        *str++ = '-';
+    }
+    else if (flags & PLUS)
+    {
+        *str++ = '+';
+    }
+    if (flags & SPECIAL)
+    {
+        *str++ = '0';
+        *str++ = 'x';
+        width -= 2;
+    }
+
+    if (!(flags & LEFT) && (flags & ZEROPAD))
+        while (size < width--)
+            *str++ = '0';
+
+    do
+    {
+        int power = powi(base, --len);
+        int digit = value / power;
+
+        *str++ = digits[digit];
+
+        value -= digit * power;
+    }
+    while (len > 0);
+
+    while (size < width--)
+        *str++ = ' ';
+
+    *str++ = '\0';
+
+    return result;
 }
 
-long atol(const char *nptr) {
-    long num = 0;
+/**
+ *  @brief convets a integer to a ASCII string
+ *  @param value    input number
+ *  @param str      output buffer
+ *  @param base     numerical base (10 = decimal, 16 = hexadecimal)
+ *  @return pointer to buffer
+ */
 
-    while(*nptr) {
-        num *= 10;
-        num += *nptr++ - '0';
-    }
-
-    return num;
-}
-
-long long atoll(const char *nptr) {
-    long long num = 0;
-
-    while(*nptr) {
-        num *= 10;
-        num += *nptr++ - '0';
-    }
-
-    return num;
+inline char * itoa(unsigned int value, char * str, int base)
+{
+    return itoa_ex(value, str, base, 0, 1);
 }
 

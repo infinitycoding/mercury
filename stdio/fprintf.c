@@ -16,20 +16,31 @@
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 /**
- *  @file math/log10.c
- *  @author Simon Diepold aka. tdotu <simon.diepold@infinitycoding.de>
+ * @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de> (usermode modification)
  */
 
-#include <math.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdarg.h>
+
 
 /**
- * @breif Calculates the common logarithm of x
- * @param x
- * @return log10(x)
+ * @brief prints a formatted string to stream
+ * @param fmt formatted string
+ * @return number of printed characters
  */
-double log10 (double x)
+int fprintf(FILE *stream, const char *fmt, ...)
 {
-    return log(x)/log(10);
+    int size;
+    char buffer[1024]; //dynamic allocation!?
+    memset(buffer, 0, 1024); //Tom! Make it gemeric! (I guess I have to do it...)
+
+    va_list args;
+    va_start(args, fmt);
+    size = vsprintf(buffer, fmt, args);
+    fwrite(buffer, sizeof(char), size, stream);
+	va_end(args);
+	return size;
 }

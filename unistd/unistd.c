@@ -70,7 +70,7 @@ int lseek(int fd, int off, int whence)
 int getchar(void)
 {
     char c;
-    read(stdin, &c, 1);
+    read(0, &c, 1);
     return (int)c;
 }
 

@@ -16,20 +16,43 @@
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 /**
- *  @file math/log10.c
- *  @author Simon Diepold aka. tdotu <simon.diepold@infinitycoding.de>
- */
+ * @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
+ */ 
 
-#include <math.h>
+#include <stdio.h>
+#include <unistd.h>
 
-/**
- * @breif Calculates the common logarithm of x
- * @param x
- * @return log10(x)
- */
-double log10 (double x)
+FILE __stdin =
 {
-    return log(x)/log(10);
-}
+    .fpos           = 0,
+    .base           = NULL,
+    .handle         = 0,
+    .flags          = 0,
+    .unget          = 0,
+    .alloc          = 0,
+    .buffincrement  = 0
+};
+
+FILE __stdout =
+{
+    .fpos           = 0,
+    .base           = NULL,
+    .handle         = 1,
+    .flags          = 0,
+    .unget          = 0,
+    .alloc          = 0,
+    .buffincrement  = 0
+};
+
+
+FILE __stderr =
+{
+    .fpos           = 0,
+    .base           = NULL,
+    .handle         = 2,
+    .flags          = 0,
+    .unget          = 0,
+    .alloc          = 0,
+    .buffincrement  = 0
+};

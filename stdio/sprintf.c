@@ -16,20 +16,29 @@
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 /**
- *  @file math/log10.c
- *  @author Simon Diepold aka. tdotu <simon.diepold@infinitycoding.de>
+ * @author Tom Slawik <tom.slawik@gmail.com> (Kernel implementation)
+ * @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de> (usermode modification)
  */
 
-#include <math.h>
+#include <stdio.h>
+#include <stdarg.h>
 
 /**
- * @breif Calculates the common logarithm of x
- * @param x
- * @return log10(x)
+ * @brief Prints a formated string into a buffer
+ * @param buf pointer to the destination buffer
+ * @param fmt formatted string to be printed
+ * @return number of printed characters
  */
-double log10 (double x)
+int sprintf(char *buf, const char *fmt, ...)
 {
-    return log(x)/log(10);
+    int size;
+
+    va_list args;
+    va_start(args, fmt);
+
+    size = vsprintf(buf, fmt, args);
+
+    va_end(args);
+    return size;
 }

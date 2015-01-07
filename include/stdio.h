@@ -27,13 +27,7 @@
 
 __BEGIN_DECLS
 
-#define stdin 0
-#define stdout 1
-#define stderr 2
 
-#define STDIN 0
-#define STDOUT 1
-#define STDERR 2
      
 #define EOF -1
 #define eof -1
@@ -45,7 +39,11 @@ __BEGIN_DECLS
 
 #define BUFSIZ 1024
 
-
+/*
+#define stdin (&__stdin)
+#define stdout (&__stdout)
+#define stderr (&__stderr)
+*/
 
 // files
 typedef struct file
@@ -63,12 +61,14 @@ typedef struct file FILE;
 
 int rename(const char *oldname, const char *newname);
 
+int getchar(void);
+int getc(FILE *stream);
 
 // printf
 int printf(const char *fmt, ...);
 int sprintf(char *buf, const char *fmt, ...);
 int vsprintf(char *buf, const char *fmt, va_list args);
-int getchar(void);
+
 
 FILE *fopen(const char *path, char *modus);
 int fclose(FILE *file);
@@ -79,10 +79,10 @@ long int ftell(FILE *file);
 int fstat(int fildes, struct stat *buf);
 int fflush ( FILE *stream);
 int fgetc(FILE *stream);
-char * fgets(char *str, int num, FILE *stream);
+char *fgets(char *str, int num, FILE *stream);
 int fputc(int character, FILE * stream);
 int fputs(const char * str, FILE * stream);
-int getc(FILE *stream);
+int fprintf (FILE *stream, const char *format, ...);
 
 __END_DECLS
 
