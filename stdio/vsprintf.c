@@ -82,8 +82,12 @@ loop:
         width = 1;
         if (isdigit(*fmt))
         {
-            width = atoi(fmt);
-            while (isdigit(*++fmt));
+            width = 0;
+            while (isdigit(*fmt))
+            {
+                width *= 10;
+                width += *fmt++ - '0';
+            }
         }
         else if (*fmt == '*')
         {
@@ -103,8 +107,12 @@ loop:
             ++fmt;
             if (isdigit(*fmt))
             {
-                precision = atoi(fmt);
-                while (isdigit(*++fmt));
+                precision = 0;
+                while (isdigit(*fmt))
+                {
+                    precision *= 10;
+                    precision += *fmt++ - '0';
+                }
             }
             else if (*fmt == '*')
             {

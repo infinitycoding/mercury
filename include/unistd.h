@@ -29,6 +29,12 @@
 
 __BEGIN_DECLS
 
+
+
+#define STDIN_FILENO    0
+#define STDOUT_FILENO   1
+#define STDERR_FILENO   2
+
 #define R_OK 0x1
 #define W_OK 0x2
 #define X_OK 0x4

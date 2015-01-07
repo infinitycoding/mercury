@@ -119,7 +119,7 @@ char * itoa_ex(unsigned int value, char * str, int base, int flags, int width)
  *  @return pointer to buffer
  */
 
-inline char * itoa(unsigned int value, char * str, int base)
+char *itoa(unsigned int value, char * str, int base)
 {
     return itoa_ex(value, str, base, 0, 1);
 }
