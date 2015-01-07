@@ -93,6 +93,17 @@ int close_port(int port)
 
 int uconnect(pid_t pid, int port)
 {
-	return (int)universe_syscall(SYS_UCONNECT,pid,port,0,0,0);
+	return (int)universe_syscall(USYS_CONNECT,pid,port,0,0,0);
 }
+
+int uread_port(int port)
+{
+	return (int)universe_syscall(USYS_READPORT,port,0,0,0,0);
+}
+
+int uaccept(int req_id)
+{
+	return (int)universe_syscall(USYS_ACCEPT,req_id,0,0,0,0);
+}
+
 

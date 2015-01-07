@@ -120,8 +120,11 @@ static inline uint32_t linux_syscall(uint32_t function, uint32_t ebx, uint32_t e
 #define SYS_ALLOC_MEMORY 2
 #define SYS_IDENTIFY_UNIVERSE 3
 #define SYS_PIPE_TRIGGER 4
-#define SYS_UCONNECT 5
-#define SYS_NAME2PID 6
+#define USYS_CONNECT 5
+#define USYS_READPORT 6
+#define USYS_ACCEPT 7
+#define USYS_DENY 8
+#define USYS_NAME2PID 9
 
 static inline uint32_t universe_syscall(uint32_t function, uint32_t ebx, uint32_t ecx, uint32_t edx, uint32_t esi, uint32_t edi)
 {
@@ -157,6 +160,8 @@ void thread_launchve(void * function, char **argv, char **envp);
 int open_port(int port);
 int close_port(int port);
 int uconnect(pid_t pid, int port);
+int uread_port(int port);
+int uaccept(int req_id);
 
 __END_DECLS
 
