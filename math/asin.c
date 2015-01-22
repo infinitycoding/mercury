@@ -18,22 +18,27 @@
 
 
 /**
- *  @file math/sin.c
- *  @author Adrian Jablonski <support@quadsoft.org>
+ *  @file math/asin.c
+ *  @author Peter Hösch <peter.hoesch@infinitycoding.de>
  */
 
 #include <math.h>
 
 /**
- * @brief Calculates sine of x
+ * @brief Calculates the arcsine of x using the taylor series
  * @param x
- * @return sin(x)
+ * @return asin(x)
  */
-double sin(double x)
+double asin(double x)
 {
     double sigma = 0;
-    int i;
+    int i, j;
     for (i = 0; i < MATH_PRECISION; i++)
-        sigma += ((powi(-1, i) * powi(x, 2 * i + 1)) / factorial(2 * i + 1));
-    return sigma;
+	{
+		double tmp = 1;
+		for(j = i; j > 0; j--)
+			tmp *= ((double)(i+j) / (double)j);
+        sigma += (tmp) * ((powi(x, 2 * i + 1)) / (powi(4, i) * (2 * i + 1)));
+	}
+	return sigma;
 }
