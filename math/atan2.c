@@ -41,7 +41,7 @@ double atan2(double y, double x)
 	else if(x == 0 && y > 0)
 		return M_PI_2l;
 	else if(x == 0 && y < 0)
-		return -M_PI_2l
+		return -M_PI_2l;
 	else
 		return 0;
 }
