@@ -157,10 +157,10 @@ void thread_launch(void * function);
 void thread_launchv(void * function, char **argv);
 void thread_launchve(void * function, char **argv, char **envp);
 
-int open_port(int port);
-int close_port(int port);
-int uconnect(pid_t pid, int port);
-int uread_port(int port);
+int open_port(char *port);
+int close_port(char *port);
+int uconnect(pid_t pid, char *port);
+int uread_port(char *port);
 int uaccept(int req_id);
 
 __END_DECLS

@@ -73,30 +73,30 @@ uint32_t identify_universe(void)
 
 // socket port stuff TODO:extra files!!
 static char pstr[32];
-char *port_str(int port)
+char *port_str(char *port)
 {
     int pid = getpid();
-    sprintf(pstr, "/proc/%d/socket/%d", pid, port);
+    sprintf(pstr, "/proc/%d/socket/%s", pid, port);
 
     return &pstr;
 }
 
-int open_port(int port)
+int open_port(char *port)
 {
     return mkdir(port_str(port), S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 }
 
-int close_port(int port)
+int close_port(char *port)
 {
     return rmdir(port_str(port));
 }
 
-int uconnect(pid_t pid, int port)
+int uconnect(pid_t pid, char *port)
 {
     return (int)universe_syscall(USYS_CONNECT,pid,port,0,0,0);
 }
 
-int uread_port(int port)
+int uread_port(char *port)
 {
     return (int)universe_syscall(USYS_READPORT,port,0,0,0,0);
 }
