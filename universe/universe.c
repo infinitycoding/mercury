@@ -106,4 +106,14 @@ int uaccept(int req_id)
     return (int)universe_syscall(USYS_ACCEPT,req_id,0,0,0,0);
 }
 
+int shmget(int key, int size, int flag)
+{
+	return (int)linux_syscall(SYS_SHMGET, key, size, flag, 0, 0);
+}
+
+void *shmat(int shm_id, const void *adresse, int flag)
+{
+	return (void*)linux_syscall(SYS_SHMAT, shm_id, adresse, flag, 0, 0);
+}
+
 

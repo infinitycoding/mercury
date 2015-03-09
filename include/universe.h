@@ -93,6 +93,10 @@ __BEGIN_DECLS
 #define SYS_GETDENTS    50 // a???
 // TODO
 #define SYS_GETCWD      54
+#define SYS_SHMGET		55
+#define SYS_SHMCTL		56
+#define SYS_SHMAT		57
+#define SYS_SHMDT		58
 
 static inline uint32_t linux_syscall(uint32_t function, uint32_t ebx, uint32_t ecx, uint32_t edx, uint32_t esi, uint32_t edi)
 {
@@ -162,6 +166,9 @@ int close_port(char *port);
 int uconnect(pid_t pid, char *port);
 int uread_port(char *port);
 int uaccept(int req_id);
+
+int shmget(int key, int size, int flag);
+void *shmat(int shm_id, const void *adresse, int flag);
 
 __END_DECLS
 
