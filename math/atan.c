@@ -33,9 +33,9 @@ double atan(double x)
 {
     double sigma = 0;
     int i;
-	x = (x)/(1 + sqrt(1 + x * x));			// arctan(x) = 2 * arctan(x / (1 + sqrt(1 + x * x)))
-											// allows the function to calculate the arctangent for |x| > 1
+    x = (x)/(1 + sqrt(1 + x * x));			// arctan(x) = 2 * arctan(x / (1 + sqrt(1 + x * x)))
+    // allows the function to calculate the arctangent for |x| > 1
     for (i = 0; i < MATH_PRECISION; i++)
-		sigma += ((powi(-1, i)) * ((powi(x, 2 * i + 1)) / (2 * i + 1)));
-	return 2 * sigma;
+        sigma += ((powi(-1, i)) * ((powi(x, 2 * i + 1)) / (2 * i + 1)));
+    return 2 * sigma;
 }

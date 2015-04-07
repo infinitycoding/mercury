@@ -31,5 +31,5 @@
  */
 double acos(double x)
 {
-	return (M_PI_2l - asin(x));
+    return (M_PI_2l - asin(x));
 }

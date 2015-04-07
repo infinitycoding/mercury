@@ -41,6 +41,6 @@ int fprintf(FILE *stream, const char *fmt, ...)
     va_start(args, fmt);
     size = vsprintf(buffer, fmt, args);
     fwrite(buffer, sizeof(char), size, stream);
-	va_end(args);
-	return size;
+    va_end(args);
+    return size;
 }

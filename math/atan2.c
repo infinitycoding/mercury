@@ -32,16 +32,16 @@
  */
 double atan2(double y, double x)
 {
-	if(x > 0)
-		return atan(y/x);
-	else if(x < 0 && y >= 0)
-		return atan((y / x) + M_PIl);
-	else if(x < 0 && y < 0)
-		return atan((y / x) - M_PIl);
-	else if(x == 0 && y > 0)
-		return M_PI_2l;
-	else if(x == 0 && y < 0)
-		return -M_PI_2l;
-	else
-		return 0;
+    if(x > 0)
+        return atan(y/x);
+    else if(x < 0 && y >= 0)
+        return atan((y / x) + M_PIl);
+    else if(x < 0 && y < 0)
+        return atan((y / x) - M_PIl);
+    else if(x == 0 && y > 0)
+        return M_PI_2l;
+    else if(x == 0 && y < 0)
+        return -M_PI_2l;
+    else
+        return 0;
 }

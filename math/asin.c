@@ -34,11 +34,11 @@ double asin(double x)
     double sigma = 0;
     int i, j;
     for (i = 0; i < MATH_PRECISION; i++)
-	{
-		double tmp = 1;
-		for(j = i; j > 0; j--)
-			tmp *= ((double)(i+j) / (double)j);
+    {
+        double tmp = 1;
+        for(j = i; j > 0; j--)
+            tmp *= ((double)(i+j) / (double)j);
         sigma += (tmp) * ((powi(x, 2 * i + 1)) / (powi(4, i) * (2 * i + 1)));
-	}
-	return sigma;
+    }
+    return sigma;
 }

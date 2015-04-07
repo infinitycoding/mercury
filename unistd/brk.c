@@ -13,7 +13,7 @@ int brk(void *addr)
 
 void *sbrk(intptr_t increment)
 {
-	brk(0);
+    brk(0);
     int r = brk(heap_end + increment);
     return (r < 0) ? r : heap_end;
 }

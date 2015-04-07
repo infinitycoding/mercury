@@ -18,7 +18,7 @@
 
 /**
  * @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
- */ 
+ */
 
 #include <stdio.h>
 #include <unistd.h>
