@@ -19,7 +19,6 @@
 /**
 	@author Michael Sippel (Universe Team) <micha@infinitycoding.de>
 */
-#include <universe.h>
 #include <stdlib.h>
 
 div_t div(int numer, int denom)

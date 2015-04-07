@@ -17,16 +17,13 @@
  */
 
 /**
- *  @file unistd/fstat.c
- *  @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
- */
+	@author Michael Sippel (Universe Team) <micha@infinitycoding.de>
+*/
+#include <syscall.h>
+#include <stdlib.h>
 
-#include <universe.h>
-#include <unistd.h>
-
-
-
-int fstat(int fildesc, struct stat *buf)
+void exit(int retv)
 {
-    return linux_syscall(SYS_FSTAT, fildesc, (uint32_t) buf, 0, 0, 0);
+    linux_syscall(SYS_EXIT, retv, 0, 0, 0, 0);
 }
+

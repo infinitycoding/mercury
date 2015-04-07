@@ -1,7 +1,7 @@
 
 #include <unistd.h>
 #include <stdint.h>
-#include <universe.h>
+#include <syscall.h>
 
 static void *heap_end = 0;
 

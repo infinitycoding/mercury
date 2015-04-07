@@ -21,7 +21,7 @@
  *  @author Micha <micha@infinitycoding.de>
  */
 
-#include <universe.h>
+#include <syscall.h>
 #include <sys/wait.h>
 #include <sys/types.h>
 

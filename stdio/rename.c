@@ -21,7 +21,6 @@
  *  @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
  */
 
-#include <universe.h>
 #include <unistd.h>
 #include <stdio.h>
 
@@ -33,5 +32,5 @@
  */
 int rename(const char *oldname, const char *newname)
 {
-    return linux_syscall(SYS_RENAME,(uint32_t) oldname,(uint32_t) newname, 0, 0, 0);
+    //return linux_syscall(SYS_RENAME,(uint32_t) oldname,(uint32_t) newname, 0, 0, 0);
 }

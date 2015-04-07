@@ -22,7 +22,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#include <universe.h>
+//#include <universe.h>
 
 #define HEAP_STATUS_FREE 0x0
 #define HEAP_STATUS_USED 0x1
@@ -40,7 +40,7 @@ static alloc_t *first_node = NULL;
 
 alloc_t *heap_expand(int pages)
 {
-    uint32_t vframe = alloc_memory(pages);
+    /*uint32_t vframe = alloc_memory(pages);
     alloc_t *new_header = (alloc_t *) vframe;
 
     new_header->size = pages*4096 - sizeof(alloc_t);
@@ -50,7 +50,8 @@ alloc_t *heap_expand(int pages)
     new_header->next = first_node;
     first_node = new_header;
 
-    return new_header;
+    return new_header;*/
+return 0;
 }
 
 void *malloc(size_t size)

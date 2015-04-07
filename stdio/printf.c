@@ -44,7 +44,7 @@ int printf(const char *fmt, ...)
 
     size = vsprintf(buffer, fmt, args);
 
-    write(2,buffer,strlen(buffer)); //fixme: change numbers after setting up udrcp stuff
+    write(1,buffer,strlen(buffer)); //fixme: change numbers after setting up udrcp stuff
 
     va_end(args);
     return size;

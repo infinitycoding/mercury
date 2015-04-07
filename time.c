@@ -19,11 +19,9 @@
   @author Peter Hösch aka. BlitzBasic <phoesch@gmx.de>
 */
 
-
-
 #include <time.h>
 
-#include <universe.h>
+
 #include <string.h>
 #include <stdlib.h>
 #include <atoi.h>
@@ -42,7 +40,8 @@ struct tm static_tm;
 
 time_t time(time_t *timer)
 {
-    time_t t = (time_t)linux_syscall(SYS_TIME, 0, 0, 0, 0, 0);
+// TODO
+    time_t t = 0;//TODO(time_t)linux_syscall(SYS_TIME, 0, 0, 0, 0, 0);
 
     if(timer != NULL)
         *timer = t;
@@ -183,7 +182,7 @@ int gettimeofday(struct timeval *tp, struct timezone *tzp)
 {
     if(tp)
     {
-        tp->tv_sec = linux_syscall(SYS_TIME, 0, 0, 0, 0, 0);
+        tp->tv_sec = 0;//TODO//linux_syscall(SYS_TIME, 0, 0, 0, 0, 0);
         tp->tv_usec = 0; // kernel can't log usecs at the time of implementation
     }
 

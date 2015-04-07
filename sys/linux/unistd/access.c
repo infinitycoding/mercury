@@ -17,13 +17,15 @@
  */
 
 /**
-	@author Michael Sippel (Universe Team) <micha@infinitycoding.de>
-*/
-#include <universe.h>
-#include <stdlib.h>
+ *  @file unistd/access.c
+ *  @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
+ */
 
-void exit(int retv)
+
+#include <syscall.h>
+#include <unistd.h>
+
+int access(const char *path, int mode)
 {
-    linux_syscall(SYS_EXIT, retv, 0, 0, 0, 0);
+    return linux_syscall(SYS_ACCESS,(uint32_t)path, (uint32_t) mode, 0, 0, 0);
 }
-

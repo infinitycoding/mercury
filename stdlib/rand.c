@@ -19,7 +19,6 @@
 /**
 	@author Michael Sippel (Universe Team) <micha@infinitycoding.de>
 */
-#include <universe.h>
 #include <stdlib.h>
 
 static unsigned int _seed = 1;

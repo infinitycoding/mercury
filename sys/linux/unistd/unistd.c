@@ -19,14 +19,11 @@
 /**
  *@author Simon Diepold aka. tdotu <simon.diepold@infinitycoding.de>
  **/
-
-#include <universe.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <sys/types.h>
+#include <syscall.h>
+#include <unistd.h>
 
-int write(int fd,const void *buffer, size_t n)
+int write(int fd, const void *buffer, size_t n)
 {
     int ret = (int)linux_syscall(SYS_WRITE, fd, (uint32_t)buffer, n, 0, 0);
     return ret;

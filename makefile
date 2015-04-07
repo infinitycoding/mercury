@@ -1,6 +1,6 @@
-C_SRCS = $(shell find -name '*.c')
+C_SRCS = $(shell find -name '*.c' ! -path './sys/*')
 SRCS = $(C_SRCS)
-SRCS += $(shell find -name '*.asm')
+SRCS += $(shell find -name '*.asm' ! -path './sys/*')
 
 L_CFLAGS = -m32 -Wall -fno-stack-protector -fno-builtin -fno-builtin-log -Wimplicit-function-declaration -nostdinc -I include
 ASFLAGS =-felf32
@@ -14,6 +14,7 @@ LD = i686-universe-ld
 
 SRCS += $(shell find -path './sys/universe/*.c')
 SRCS += $(shell find -path './sys/universe/*.asm')
+L_CFLAGS += -I include/universe
 LIBPATH = universe_libc.a
 
 else ifeq ($(TARGET), linux)
@@ -23,6 +24,7 @@ LD = ld
 
 SRCS += $(shell find -path './sys/linux/*.c')
 SRCS += $(shell find -path './sys/linux/*.asm')
+L_CFLAGS += -I include/linux
 LIBPATH = linux_libc.a
 
 endif

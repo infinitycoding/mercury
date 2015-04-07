@@ -19,7 +19,6 @@
 /**
 	@author Michael Sippel <micha@infinitycoding.de>
 */
-#include <universe.h>
 #include <stdlib.h>
 
 int abs(int j)
