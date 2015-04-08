@@ -24,82 +24,90 @@
 #include <string.h>
 //#include <universe.h>
 
-#define HEAP_STATUS_FREE 0x0
-#define HEAP_STATUS_USED 0x1
-
-typedef struct alloc
+typedef struct heap_node
 {
     size_t size;
-    uint32_t base;
-    int status;
 
-    struct alloc *next;
-} alloc_t;
+    struct heap_node *prev;
+    struct heap_node *next;
+} heap_node_t;
 
-static alloc_t *first_node = NULL;
+static heap_node_t *first_node = NULL;
 
-alloc_t *heap_expand(int pages)
+/*
+ * Insert in the list
+ */
+void heap_insert_node(heap_node_t *node)
 {
-    /*uint32_t vframe = alloc_memory(pages);
-    alloc_t *new_header = (alloc_t *) vframe;
+    node->prev = NULL;
+    node->next = first_node;
+    if(first_node != NULL)
+        first_node->prev = node;
 
-    new_header->size = pages*4096 - sizeof(alloc_t);
-    new_header->base = vframe + sizeof(alloc_t);
-    new_header->status = HEAP_STATUS_FREE;
+    first_node = node;
+}
 
-    new_header->next = first_node;
-    first_node = new_header;
+/**
+ * remove node from list
+ */
+void heap_remove_node(heap_node_t *node)
+{
+    if(node->prev != NULL)
+        node->prev->next = node->next;
 
-    return new_header;*/
-return 0;
+    if(node->next != NULL)
+        node->next->prev = node->prev;
+}
+
+/**
+ * search node with minimum size
+ */
+heap_node_t *heap_find_node(size_t size)
+{
+    heap_node_t *node = first_node;
+    heap_node_t *best_node = NULL;
+
+    while(node != NULL)
+    {
+        if(node->size >= size)
+        {
+            if(best_node == NULL || node->size < best_node->size)
+                best_node = node;
+        }
+
+        node = node->next;
+    }
+
+    return best_node;
+}
+
+heap_node_t *heap_create_node(size_t size)
+{
+    size_t n = size + sizeof(heap_node_t);
+    heap_node_t *new_node = sbrk(n) - n;
+    new_node->size = size;
+
+    return new_node;
 }
 
 void *malloc(size_t size)
 {
-    alloc_t *header = first_node;
-    //vaddr_t data = 0;
-    int n_size = size + sizeof(alloc_t);
+    heap_node_t *node = heap_find_node(size);
+    if(node == NULL)
+        node = heap_create_node(size);
+    else
+        heap_remove_node(node);
 
-    while(header != NULL)
-    {
-        if(header->size >= size && header->status == HEAP_STATUS_FREE)
-        {
-            header->status = HEAP_STATUS_USED;
-            if(header->size > n_size)
-            {
-                alloc_t *new_header = (alloc_t *)(header->base + size);
-                new_header->base    = header->base + n_size;
-                new_header->size = header->size - n_size;
-                new_header->status = HEAP_STATUS_FREE;
-                header->size = size;
-
-                new_header->next = first_node;
-                first_node = new_header;
-            }
-
-            return (void *)header->base;
-        }
-        header = header->next;
-    }
-
-    header = heap_expand(NUM_PAGES(n_size));
-    if(header != NULL)
-    {
-        header->status = HEAP_STATUS_USED;
-        return (void *)header->base;
-    }
-
-    return NULL;
+    return ((void*)node + sizeof(heap_node_t));
 }
 
 void free(void *ptr)
 {
     if(ptr <= 0)
         return;
-    alloc_t *header = (alloc_t*)((uintptr_t)ptr - sizeof(alloc_t));
-    header->status = HEAP_STATUS_FREE;
+    heap_node_t *node = (heap_node_t*)((uintptr_t)ptr - sizeof(heap_node_t));
+    heap_insert_node(node);
 }
-
 
 void *calloc(size_t num, size_t size)
 {
@@ -112,7 +120,7 @@ void *calloc(size_t num, size_t size)
 void *realloc(void *ptr, size_t size)
 {
     void *dest = malloc(size);
-    alloc_t *source_alloc = ptr - sizeof(alloc_t);
+    heap_node_t *source_alloc = ptr - sizeof(heap_node_t);
 
     memmove(dest, ptr, source_alloc->size);
     free(ptr);

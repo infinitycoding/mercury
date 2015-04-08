@@ -26,7 +26,12 @@
 #include <string.h>
 #include <stdarg.h>
 
-
+int puts(const char *str)
+{
+    int ret = write(1, str, strlen(str));
+    write(1, "\n", 1);
+    return ret;
+}
 
 /**
  * @brief prints a formatted string to the standard output

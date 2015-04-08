@@ -65,6 +65,7 @@ int getchar(void);
 int getc(FILE *stream);
 
 // printf
+int puts(const char *str);
 int printf(const char *fmt, ...);
 int sprintf(char *buf, const char *fmt, ...);
 int vsprintf(char *buf, const char *fmt, va_list args);
