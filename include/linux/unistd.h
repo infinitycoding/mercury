@@ -26,6 +26,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <sys/stat.h>
+#include <sys/types.h>
 
 __BEGIN_DECLS
 
@@ -71,6 +72,8 @@ int access(const char *path, int mode);
 
 int mknod(char *path, int mode, int dev);
 int mkfifo(char *path, int mode);
+
+pid_t getpid(void);
 
 __END_DECLS
 
