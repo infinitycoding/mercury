@@ -138,10 +138,10 @@ void List<T>::pushBack(T element)
     while(lock) {}
     lock = true;
 
-    newNode->prev = dummy;
-    newNode->next = dummy->next;
-    dummy->next->prev = newNode;
-    dummy->next = newNode;
+    newNode->next = dummy;
+    newNode->prev = dummy->prev;
+    dummy->prev->next = newNode;
+    dummy->prev = newNode;
 
     lock = false;
 }
@@ -211,7 +211,6 @@ size_t List<T>::size()
 
         s++;
         i.next();
-        printf("loop\n");
     }
 
     lock = false;
