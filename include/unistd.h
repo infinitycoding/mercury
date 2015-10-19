@@ -74,6 +74,8 @@ int mknod(char *path, int mode, int dev);
 int mkfifo(char *path, int mode);
 
 pid_t getpid(void);
+pid_t fork(void);
+int pipe(int filedes[2]);
 
 __END_DECLS
 

@@ -21,9 +21,10 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-uint32_t fork()
+
+int fork()
 {
-    uint32_t pid;
+    int pid;
     asm volatile("int $128;": "=a"(pid) : "a" (SYS_FORK));
     return pid;
 }

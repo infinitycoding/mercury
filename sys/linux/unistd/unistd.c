@@ -23,6 +23,16 @@
 #include <syscall.h>
 #include <unistd.h>
 
+int pipe(int filedes[2])
+{
+    return (int) linux_syscall(SYS_PIPE,(uint32_t)filedes,0,0,0,0);
+}
+
+pid_t fork(void)
+{
+    return (int) linux_syscall(SYS_FORK,0,0,0,0,0);
+}
+
 int write(int fd, const void *buffer, size_t n)
 {
     int ret = (int)linux_syscall(SYS_WRITE, fd, (uint32_t)buffer, n, 0, 0);
