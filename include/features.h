@@ -1,4 +1,3 @@
-
 #ifndef _features_h_
 #define _features_h_
 
@@ -20,19 +19,43 @@
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+	@author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
+	@author Michael Sippel <micha@infinitycoding.de>
+	@author Johannes Spangenberg aka. JojOatXGME <jojo@xgme.de>
+*/
 
 
 #ifdef    __cplusplus
-     #define __BEGIN_DECLS   extern "C" {
-     #define __END_DECLS     }
+#  define __BEGIN_DECLS extern "C" {
+#  define __END_DECLS   }
 #else
-     #define __BEGIN_DECLS
-     #define __END_DECLS
+#  define __BEGIN_DECLS
+#  define __END_DECLS
+#endif
+
+#if __cplusplus >= 201103L
+#  define __noexcept noexcept
+#elif defined __cplusplus
+#  define __noexcept throw()
+#else
+#  define __noexcept
+#endif
+
+#if __cplusplus >= 201103L
+#  define __noreturn [[noreturn]]
+#else
+#  define __noreturn __attribute__((__noreturn__))
+#endif
+
+#define __pure __attribute__((__pure__))
+#define __nonnull(...) __attribute__((__nonnull__(__VA_ARGS__)))
+
+#if __cplusplus >= 201103L
+#  define __nullptr nullptr
+#else
+#  define __nullptr 0
 #endif
 
 
-#define offsetof(type, member) ((size_t)(&((type *)0)->member))
-
-
 #endif
-

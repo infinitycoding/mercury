@@ -19,12 +19,27 @@
      along with the mercury c-library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+	@author Michael Sippel <micha@infinitycoding.de>
+	@author Johannes Spangenberg aka. JojOatXGME <jojo@xgme.de>
+*/
+
+
 #ifndef NULL
-#define NULL 			(void *)0
+#define NULL ((void *)0)
 #endif
+
+#define offsetof(type, member) ( (size_t) &((type*)0)->member )
 
 typedef __SIZE_TYPE__ size_t;
 typedef __PTRDIFF_TYPE__ ptrdiff_t;
 
+#if __cplusplus >= 201103L
+typedef decltype(nullptr) nullptr_t;
+#endif
+#if __cplusplus >= 201103L || __STDC_VERSION__ >= 201112L
+typedef long double max_align_t; // TODO depends on platform
 #endif
 
+
+#endif
