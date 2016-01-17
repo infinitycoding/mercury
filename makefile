@@ -2,10 +2,11 @@ C_SRCS   = $(shell find -name '*.c' ! -path './sys/*')
 AS_SRCS  = $(shell find -name '*.asm' ! -path './sys/*')
 CXX_SRCS = $(shell find -name '*.cpp')
 
-ARFLAGS   = -rcs
-ASFLAGS   = -felf32
-CFLAGS   += -m32 -Wall -fno-stack-protector -fno-builtin -fno-builtin-log -Wimplicit-function-declaration -nostdinc -Iinclude
-CXXFLAGS += -m32 -Wall -fno-stack-protector -fno-builtin -fno-builtin-log -fno-rtti -fno-exceptions -nostdinc -Iinclude/cpp -Iinclude
+ARFLAGS    = -rcs
+ASFLAGS    = -felf32
+CFLAGS    += -m32 -Wall -fno-stack-protector -fno-builtin -fno-builtin-log -Wimplicit-function-declaration -nostdinc -Iinclude
+CXXFLAGS  += -m32 -Wall -fno-stack-protector -fno-builtin -fno-builtin-log -fno-rtti -fno-exceptions -nostdinc -Iinclude/cpp -Iinclude
+STYLEFLAGS = --style=allman
 
 TARGET ?= linux
 PREFIX ?= /opt/mercury
