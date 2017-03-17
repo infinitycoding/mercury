@@ -39,12 +39,6 @@ __BEGIN_DECLS
 
 #define BUFSIZ 1024
 
-/*
-#define stdin (&__stdin)
-#define stdout (&__stdout)
-#define stderr (&__stderr)
-*/
-
 // files
 typedef struct file
 {
@@ -58,6 +52,11 @@ typedef struct file
 } file_t;
 typedef struct file FILE;
 
+extern FILE __stderr, __stdin, __stdout;
+
+#define stdin (&__stdin)
+#define stdout (&__stdout)
+#define stderr (&__stderr)
 
 int rename(const char *oldname, const char *newname);
 

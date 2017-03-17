@@ -23,6 +23,12 @@
 #include <string.h>
 #include <sys/stat.h>
 
+
+//default file handles
+FILE __stdin = {.handle=0, .fpos=0, .base=0, .flags=0, .unget=0, .alloc=0, .buffincrement=0};
+FILE __stdout = {.handle=1, .fpos=0, .base=0, .flags=0, .unget=0, .alloc=0, .buffincrement=0};
+FILE __stderr = {.handle=2, .fpos=0, .base=0, .flags=0, .unget=0, .alloc=0, .buffincrement=0};
+
 /**
  *  @file stdio/fopen.c
  *  @author Michael Sippel <micha@infinitycoding.de>
