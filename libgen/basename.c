@@ -1,4 +1,5 @@
 #include <libgen.h>
+#include <stddef.h>
 
 char *basename(char *path)
 {
