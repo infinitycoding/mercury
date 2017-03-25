@@ -90,8 +90,13 @@ test: $(C_TEST_SRC)
 	$(call cecho,2,"--- Compiling unit test $< ...")
 	@$(CC) -nostdlib -nostdinc -m32 -I include/  -flto -o $(basename $< .c) $< $(LIBC_PATH)
 	@chmod +x $(basename $< .c)
-	@./$(basename $< .c) < $(shell dirname  $<)/input >$(shell dirname  $<)/result
-	@diff $(shell dirname  $<)/output $(shell dirname  $<)/result
+	@if [ -a  $(addsuffix .in,$(shell dirname  $<)/$(basename $< .c)) ] ; \
+	then \
+		./$(basename $< .c)< $(addsuffix .in,$(shell dirname  $<)/$(basename $< .c)) >$(addsuffix .res,$(shell dirname  $<)/$(basename $< .c)) ; \
+		@diff $(addsuffix .out,$(shell dirname  $<)/$(basename $< .c)) $(addsuffix .res,$(shell dirname  $<)/$(basename $< .c)) ; \
+	else \
+	./$(basename $< .c) ; \
+	fi;
 
 style: $(C_SRCS) $(CXX_SRCS)
 	astyle $(STYLEFLAGS) $^
