@@ -1,8 +1,8 @@
 
 #include <string.h>
 
+extern char **environ;
 
-char **environ;
 
 char * getenv( const char * name )
 {
@@ -18,4 +18,3 @@ char * getenv( const char * name )
     }
     return NULL;
 }
-

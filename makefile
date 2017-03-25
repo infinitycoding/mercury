@@ -1,6 +1,7 @@
-C_SRCS   = $(shell find -name '*.c' ! -path './sys/*')
-AS_SRCS  = $(shell find -name '*.asm' ! -path './sys/*')
-CXX_SRCS = $(shell find -name '*.cpp')
+C_SRCS   = $(shell find -name '*.c' ! -path './sys/*' ! -path './test/*' )
+C_TEST_SRC = $(shell find -name '*.c' -path './test/*' )
+AS_SRCS  = $(shell find -name '*.asm' ! -path './sys/*' ! -path './test/*' )
+CXX_SRCS = $(shell find -name '*.cpp' ! -path './test/*')
 
 ARFLAGS    = -rcs
 ASFLAGS    = -felf32
@@ -27,8 +28,8 @@ LIBCXX_PATH = universe_libc++.a
 
 else ifeq ($(TARGET), linux)
 
-CC  = gcc
-CXX = g++
+CC  = clang
+CXX = clang++
 AS  = nasm
 LD  = ld
 
@@ -44,6 +45,7 @@ endif
 AS_OBJS  = $(addsuffix .o,$(basename $(AS_SRCS)))
 C_OBJS   = $(addsuffix .o,$(basename $(C_SRCS)))
 CXX_OBJS = $(addsuffix .o,$(basename $(CXX_SRCS)))
+C_TEST_EXECUTABLES = $(basename $(C_TEST_SRC) .c)
 
 define cecho
 	@[ -t 1 ] && tput setaf $1 && tput bold || true
@@ -84,6 +86,13 @@ install: all
 	@mkdir -p "$(PREFIX)/include"
 	@cp -R ./include/* "$(PREFIX)/include/"
 
+test: $(C_TEST_SRC)
+	$(call cecho,2,"--- Compiling unit test $< ...")
+	@$(CC) -nostdlib -nostdinc -m32 -I include/  -flto -o $(basename $< .c) $< $(LIBC_PATH)
+	@chmod +x $(basename $< .c)
+	@./$(basename $< .c) < $(shell dirname  $<)/input >$(shell dirname  $<)/result
+	@diff $(shell dirname  $<)/output $(shell dirname  $<)/result
+
 style: $(C_SRCS) $(CXX_SRCS)
 	astyle $(STYLEFLAGS) $^
 
@@ -93,5 +102,6 @@ clean:
 	$(RM) $(CXX_OBJS)
 	$(RM) $(LIBC_PATH)
 	$(RM) $(LIBCXX_PATH)
+	$(RM) $(C_TEST_EXECUTABLES)
 
 .PHONY: clean

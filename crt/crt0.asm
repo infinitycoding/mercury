@@ -1,6 +1,9 @@
+SECTION .bss
+global environ
+environ: resb 4
+
 SECTION .text
 extern main
-extern environ
 
 global _start
 _start:
@@ -11,4 +14,3 @@ _start:
 	mov eax, 1
 	int 0x80
 	jmp $
-
