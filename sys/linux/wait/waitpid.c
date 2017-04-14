@@ -27,6 +27,5 @@
 
 pid_t waitpid(pid_t pid, int *status, int options)
 {
-    return (pid_t) linux_syscall(SYS_WAITPID, pid, status, options, 0, 0);
+    return (pid_t) linux_syscall(SYS_WAITPID, pid,(uint32_t) status, options, 0, 0);
 }
-

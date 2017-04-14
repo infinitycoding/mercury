@@ -39,7 +39,7 @@
  *  @return pointer to buffer
  */
 
-char * itoa_ex(unsigned int value, char * str, int base, int flags, int width)
+char * itoa_ex(int value, char * str, int base, int flags, int width)
 {
     char *result = str;
     unsigned int size;
@@ -110,17 +110,3 @@ char * itoa_ex(unsigned int value, char * str, int base, int flags, int width)
 
     return result;
 }
-
-/**
- *  @brief convets a integer to a ASCII string
- *  @param value    input number
- *  @param str      output buffer
- *  @param base     numerical base (10 = decimal, 16 = hexadecimal)
- *  @return pointer to buffer
- */
-
-char *itoa(unsigned int value, char * str, int base)
-{
-    return itoa_ex(value, str, base, 0, 1);
-}
-

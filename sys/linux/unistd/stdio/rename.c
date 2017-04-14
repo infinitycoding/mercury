@@ -17,23 +17,21 @@
  */
 
 /**
- *  @file stdio/fputc.c
+ *  @file stdio/rename.c
  *  @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
  */
 
 #include <unistd.h>
 #include <stdio.h>
+#include <syscall.h>
 
 /**
- *  @brief Writes a character to a stream.
- *  @param character the character to be written
- *  @param stream
- *  @return Success = the input character, Failure = EOF
+ * @brief Renames a file.
+ * @param oldname The old name of the file
+ * @param newname The new name for the file
+ * @return 0 if the operation was successful
  */
-int fputc(int character, FILE * stream)
+int rename(const char *oldname, const char *newname)
 {
-    if(write(stream->handle, &character, 1))
-        return character;
-    else
-        return EOF;
+    return linux_syscall(SYS_RENAME,(uint32_t) oldname,(uint32_t) newname, 0, 0, 0);
 }

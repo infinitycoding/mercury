@@ -14,6 +14,7 @@ Dependecies:
 Currently supported platforms:
 =======
 * universe
+* linux
 
 How to configure:
 ========
@@ -27,3 +28,7 @@ How to compile:
 ````
     make all
 ````
+
+Project structure:
+========
+The folders are named after the include file which contains the prototypes.

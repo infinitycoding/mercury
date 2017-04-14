@@ -25,7 +25,6 @@
 #include <limits.h>
 #include <string.h>
 
-
 const struct lconv _LC_c =
 {
     .decimal_point 		=	".",
@@ -38,20 +37,20 @@ const struct lconv _LC_c =
     .mon_grouping		=	"",
     .positive_sign		=	"",
     .negative_sign		=	"0",
-    .frac_digits		=	CHAR_MAX,
-    .p_cs_precedes		= 	CHAR_MAX,
-    .n_cs_precedes		= 	CHAR_MAX,
-    .p_sep_by_space		= 	CHAR_MAX,
-    .n_sep_by_space		= 	CHAR_MAX,
-    .p_sign_posn		= 	CHAR_MAX,
-    .n_sign_posn		= 	CHAR_MAX,
-    .int_frac_digits	= 	CHAR_MAX,
-    .int_p_cs_precedes	= 	CHAR_MAX,
-    .int_n_cs_precedes	= 	CHAR_MAX,
-    .int_p_sep_by_space	= 	CHAR_MAX,
-    .int_n_sep_by_space	= 	CHAR_MAX,
-    .int_p_sign_posn	= 	CHAR_MAX,
-    .int_n_sign_posn	= 	CHAR_MAX
+    .frac_digits		=	SCHAR_MAX,
+    .p_cs_precedes		= 	SCHAR_MAX,
+    .n_cs_precedes		= 	SCHAR_MAX,
+    .p_sep_by_space		= 	SCHAR_MAX,
+    .n_sep_by_space		= 	SCHAR_MAX,
+    .p_sign_posn		= 	SCHAR_MAX,
+    .n_sign_posn		= 	SCHAR_MAX,
+    .int_frac_digits	= 	SCHAR_MAX,
+    .int_p_cs_precedes	= 	SCHAR_MAX,
+    .int_n_cs_precedes	= 	SCHAR_MAX,
+    .int_p_sep_by_space	= 	SCHAR_MAX,
+    .int_n_sep_by_space	= 	SCHAR_MAX,
+    .int_p_sign_posn	= 	SCHAR_MAX,
+    .int_n_sign_posn	= 	SCHAR_MAX
 };
 
 const struct lconv _LC_en_US =
@@ -66,20 +65,20 @@ const struct lconv _LC_en_US =
     .mon_grouping		=	"",
     .positive_sign		=	"",
     .negative_sign		=	"-",
-    .frac_digits		=	CHAR_MAX,
+    .frac_digits		=	SCHAR_MAX,
     .p_cs_precedes		= 	1,
     .n_cs_precedes		= 	1,
-    .p_sep_by_space		= 	CHAR_MAX,
-    .n_sep_by_space		= 	CHAR_MAX,
-    .p_sign_posn		= 	CHAR_MAX,
-    .n_sign_posn		= 	CHAR_MAX,
-    .int_frac_digits	= 	CHAR_MAX,
-    .int_p_cs_precedes	= 	CHAR_MAX,
-    .int_n_cs_precedes	= 	CHAR_MAX,
-    .int_p_sep_by_space	= 	CHAR_MAX,
-    .int_n_sep_by_space	= 	CHAR_MAX,
-    .int_p_sign_posn	= 	CHAR_MAX,
-    .int_n_sign_posn	= 	CHAR_MAX
+    .p_sep_by_space		= 	SCHAR_MAX,
+    .n_sep_by_space		= 	SCHAR_MAX,
+    .p_sign_posn		= 	SCHAR_MAX,
+    .n_sign_posn		= 	SCHAR_MAX,
+    .int_frac_digits	= 	SCHAR_MAX,
+    .int_p_cs_precedes	= 	SCHAR_MAX,
+    .int_n_cs_precedes	= 	SCHAR_MAX,
+    .int_p_sep_by_space	= 	SCHAR_MAX,
+    .int_n_sep_by_space	= 	SCHAR_MAX,
+    .int_p_sign_posn	= 	SCHAR_MAX,
+    .int_n_sign_posn	= 	SCHAR_MAX
 };
 
 struct lconv _LC_STATE =
@@ -94,20 +93,20 @@ struct lconv _LC_STATE =
     .mon_grouping		=	"",
     .positive_sign		=	"",
     .negative_sign		=	"-",
-    .frac_digits		=	CHAR_MAX,
+    .frac_digits		=	SCHAR_MAX,
     .p_cs_precedes		= 	1,
     .n_cs_precedes		= 	1,
-    .p_sep_by_space		= 	CHAR_MAX,
-    .n_sep_by_space		= 	CHAR_MAX,
-    .p_sign_posn		= 	CHAR_MAX,
-    .n_sign_posn		= 	CHAR_MAX,
-    .int_frac_digits	= 	CHAR_MAX,
-    .int_p_cs_precedes	= 	CHAR_MAX,
-    .int_n_cs_precedes	= 	CHAR_MAX,
-    .int_p_sep_by_space	= 	CHAR_MAX,
-    .int_n_sep_by_space	= 	CHAR_MAX,
-    .int_p_sign_posn	= 	CHAR_MAX,
-    .int_n_sign_posn	= 	CHAR_MAX
+    .p_sep_by_space		= 	SCHAR_MAX,
+    .n_sep_by_space		= 	SCHAR_MAX,
+    .p_sign_posn		= 	SCHAR_MAX,
+    .n_sign_posn		= 	SCHAR_MAX,
+    .int_frac_digits	= 	SCHAR_MAX,
+    .int_p_cs_precedes	= 	SCHAR_MAX,
+    .int_n_cs_precedes	= 	SCHAR_MAX,
+    .int_p_sep_by_space	= 	SCHAR_MAX,
+    .int_n_sep_by_space	= 	SCHAR_MAX,
+    .int_p_sign_posn	= 	SCHAR_MAX,
+    .int_n_sign_posn	= 	SCHAR_MAX
 };
 
 

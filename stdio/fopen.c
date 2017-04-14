@@ -79,7 +79,7 @@ FILE *fopen(const char *path, char *modus)
         fstat(file->handle, &stat);
         file->alloc = stat.st_size;
 
-        if(m |= O_APPEND)
+        if((m |= O_APPEND))
         {
             file->fpos = (char *)file->alloc;
         }

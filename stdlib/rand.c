@@ -33,4 +33,3 @@ void srand(unsigned int seed)
 {
     _seed = seed;
 }
-

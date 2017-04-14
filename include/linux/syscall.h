@@ -92,4 +92,3 @@ static inline uint32_t linux_syscall(uint32_t function, uint32_t ebx, uint32_t e
 }
 
 #endif
-

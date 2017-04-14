@@ -17,20 +17,19 @@
  */
 
 /**
- *  @file stdio/rename.c
- *  @author Simon Diepold aka. Tdotu <simon.diepold@infinitycoding.de>
- */
+	@author Tom Slawik <tom.slawik@gmail.com>
+*/
 
-#include <unistd.h>
-#include <stdio.h>
+#include <atoi.h>
 
 /**
- * @brief Renames a file.
- * @param oldname The old name of the file
- * @param newname The new name for the file
- * @return 0 if the operation was successful
+ *  @brief convets a integer to a ASCII string
+ *  @param value    input number
+ *  @param str      output buffer
+ *  @param base     numerical base (10 = decimal, 16 = hexadecimal)
+ *  @return pointer to buffer
  */
-int rename(const char *oldname, const char *newname)
+char *itoa(int value, char * str, int base)
 {
-    //return linux_syscall(SYS_RENAME,(uint32_t) oldname,(uint32_t) newname, 0, 0, 0);
+    return itoa_ex(value, str, base, 0, 1);
 }

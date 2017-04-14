@@ -26,7 +26,7 @@
 
 sighandler_t signal(int signum, sighandler_t handler)
 {
-    linux_syscall(SYS_SIGNAL, signum, handler, 0, 0, 0);
+    linux_syscall(SYS_SIGNAL, signum,(uint32_t) handler, 0, 0, 0);
     return handler;
 }
 
@@ -39,4 +39,3 @@ int raise(int sig)
 {
     return kill(getpid(), sig);
 }
-

@@ -1,52 +1,76 @@
-C_SRCS   = $(shell find -name '*.c' ! -path './sys/*' ! -path './test/*' )
-C_TEST_SRC = $(shell find -name '*.c' -path './test/*' )
-AS_SRCS  = $(shell find -name '*.asm' ! -path './sys/*' ! -path './test/*' )
-CXX_SRCS = $(shell find -name '*.cpp' ! -path './test/*')
-
-ARFLAGS    = -rcs
-ASFLAGS    = -felf32
-CFLAGS    += -m32 -Wall -fno-stack-protector -fno-builtin -fno-builtin-log -Wimplicit-function-declaration -nostdinc -Iinclude
-CXXFLAGS  += -m32 -Wall -fno-stack-protector -fno-builtin -fno-builtin-log -fno-rtti -fno-exceptions -nostdinc -Iinclude/cpp -Iinclude
-STYLEFLAGS = --style=allman
-
+#insert zour target here
 TARGET ?= linux
 PREFIX ?= /opt/mercury
 
-ifeq ($(TARGET), universe)
 
+C_SRCS      = $(shell find -name '*.c' ! -path './sys/*' ! -path './test/*' )
+C_TEST_SRC  = $(shell find -name '*.c' -path './test/*' )
+AS_SRCS     = $(shell find -name '*.asm' ! -path './sys/*' ! -path './test/*' )
+CXX_SRCS    = $(shell find -name '*.cpp' ! -path './test/*')
+
+ARFLAGS     = -rcs
+ASFLAGS     = -felf32
+CFLAGS      = -m32 -Wall -fno-builtin -fno-builtin-log -nostdinc -Iinclude
+CXXFLAGS    = -m32 -Wall -fno-builtin -fno-builtin-log -fno-rtti -fno-exceptions -nostdinc -Iinclude/cpp -Iinclude
+STYLEFLAGS  = --style=allman
+
+
+
+#Operating szstem switchS
+#Universe
+ifeq ($(TARGET), universe)
 CC  = i686-universe-gcc
 CXX = i686-universe-g++
 AS  = nasm
 LD  = i686-universe-ld
 
-AS_SRCS += $(shell find -path './sys/universe/*.asm')
-C_SRCS  += $(shell find -path './sys/universe/*.c')
-CFLAGS   += -Iinclude/universe
-CXXFLAGS += -Iinclude/univers
+AS_SRCS    += $(shell find -path './sys/universe/*.asm')
+C_SRCS     += $(shell find -path './sys/universe/*.c')
+CFLAGS     += -Iinclude/universe
+CXXFLAGS   += -Iinclude/univers
 LIBC_PATH   = universe_libc.a
 LIBCXX_PATH = universe_libc++.a
 
-else ifeq ($(TARGET), linux)
 
+#Linux
+else ifeq ($(TARGET), linux)
 CC  = clang
 CXX = clang++
 AS  = nasm
 LD  = ld
 
-AS_SRCS += $(shell find -path './sys/linux/*.asm')
-C_SRCS  += $(shell find -path './sys/linux/*.c')
-CFLAGS   += -Iinclude/linux
-CXXFLAGS += -Iinclude/linux
+AS_SRCS    += $(shell find -path './sys/linux/*.asm')
+C_SRCS     += $(shell find -path './sys/linux/*.c')
+CFLAGS     += -Iinclude/linux
+CXXFLAGS   += -Iinclude/linux
 LIBC_PATH   = linux_libc.a
 LIBCXX_PATH = linux_libc++.a
 
+
+#no operating system
+else ifeq ($(TARGET), noos)
+CC  = clang
+CXX = clang++
+AS  = nasm
+LD  = ld
+
+C_SRCS      = $(shell find -name '*.c' ! -path './sys/*' ! -path './test/*' ! -path './stdio/*' ! -path './stdlib/malloc.c' )
+C_TEST_SRC  = $(shell find -name '*.c' -path './test/*' ! -path './test/stdio/*' ! -path './test/stdlib/malloc.c' )
+CXX_SRCS    = $(shell find -name '*.cpp' ! -path './test/*' ! -path './stdio/*' ! -path './stdlib/malloc.c')
+LIBC_PATH   = noos_libc.a
+LIBCXX_PATH = noos_libc++.a
 endif
+
+
+
 
 AS_OBJS  = $(addsuffix .o,$(basename $(AS_SRCS)))
 C_OBJS   = $(addsuffix .o,$(basename $(C_SRCS)))
 CXX_OBJS = $(addsuffix .o,$(basename $(CXX_SRCS)))
 C_TEST_EXECUTABLES = $(basename $(C_TEST_SRC) .c)
 
+
+#function for colored output
 define cecho
 	@[ -t 1 ] && tput setaf $1 && tput bold || true
 	@echo $2
@@ -54,6 +78,7 @@ define cecho
 endef
 
 
+#Targets
 all: $(LIBC_PATH) $(LIBCXX_PATH)
 
 $(LIBC_PATH): $(C_OBJS) $(AS_OBJS)

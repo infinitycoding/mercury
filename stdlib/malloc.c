@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <unistd.h>
 //#include <universe.h>
 
 typedef struct heap_node
@@ -127,5 +128,3 @@ void *realloc(void *ptr, size_t size)
 
     return dest;
 }
-
-

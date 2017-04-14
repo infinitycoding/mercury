@@ -23,6 +23,7 @@
 #include <syscall.h>
 #include <unistd.h>
 
+
 int pipe(int filedes[2])
 {
     return (int) linux_syscall(SYS_PIPE,(uint32_t)filedes,0,0,0,0);
@@ -83,8 +84,8 @@ int getchar(void)
 
 char *getcwd(char *buf, int buflen)
 {
-    if(buf == NULL && buflen != 0)
-        buf = (char *)malloc(sizeof(char) * buflen);
+    if(buf == NULL || buflen == 0)
+        return buf;
 
     return (char *)linux_syscall(SYS_GETCWD,(uint32_t)buf, buflen, 0, 0, 0);
 }
@@ -114,5 +115,3 @@ pid_t getpid(void)
 {
     return (pid_t) linux_syscall(SYS_GETPID, 0, 0, 0, 0, 0);
 }
-
-
