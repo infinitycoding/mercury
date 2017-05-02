@@ -3,10 +3,17 @@ TARGET ?= linux
 PREFIX ?= /opt/mercury
 
 
-C_SRCS      = $(shell find -name '*.c' ! -path './sys/*' ! -path './test/*' )
+ifeq ($(noheap),true)
+C_SRC_SEARCH_EX       = ! -path './list.c' ! -path './stdlib/malloc.c' ! -path './libgen/*'
+CXX_SRCS_SEARCH_EX    = $(C_SRC_SEARCH_EX) ! -path '.cpp/new.cpp'
+LIBEXT                =noheap_
+endif
+
+
+C_SRCS      = $(shell find -name '*.c' ! -path './sys/*' ! -path './test/*' $(C_SRC_SEARCH_EX) )
 C_TEST_SRC  = $(shell find -name '*.c' -path './test/*' )
 AS_SRCS     = $(shell find -name '*.asm' ! -path './sys/*' ! -path './test/*' )
-CXX_SRCS    = $(shell find -name '*.cpp' ! -path './test/*')
+CXX_SRCS    = $(shell find -name '*.cpp' ! -path './test/*' $(CXX_SRCS_SEARCH_EX))
 
 ARFLAGS     = -rcs
 ASFLAGS     = -felf32
@@ -14,9 +21,7 @@ CFLAGS      = -m32 -Wall -fno-builtin -fno-builtin-log -nostdinc -Iinclude
 CXXFLAGS    = -m32 -Wall -fno-builtin -fno-builtin-log -fno-rtti -fno-exceptions -nostdinc -Iinclude/cpp -Iinclude
 STYLEFLAGS  = --style=allman
 
-
-
-#Operating szstem switchS
+#Operating system switch
 #Universe
 ifeq ($(TARGET), universe)
 CC  = i686-universe-gcc
@@ -28,8 +33,8 @@ AS_SRCS    += $(shell find -path './sys/universe/*.asm')
 C_SRCS     += $(shell find -path './sys/universe/*.c')
 CFLAGS     += -Iinclude/universe
 CXXFLAGS   += -Iinclude/univers
-LIBC_PATH   = universe_libc.a
-LIBCXX_PATH = universe_libc++.a
+LIBC_PATH   = $(LIBEXT)universe_libc.a
+LIBCXX_PATH = $(LIBEXT)universe_libc++.a
 
 
 #Linux
@@ -43,8 +48,8 @@ AS_SRCS    += $(shell find -path './sys/linux/*.asm')
 C_SRCS     += $(shell find -path './sys/linux/*.c')
 CFLAGS     += -Iinclude/linux
 CXXFLAGS   += -Iinclude/linux
-LIBC_PATH   = linux_libc.a
-LIBCXX_PATH = linux_libc++.a
+LIBC_PATH   = $(LIBEXT)linux_libc.a
+LIBCXX_PATH = $(LIBEXT)linux_libc++.a
 
 
 #no operating system
@@ -54,13 +59,13 @@ CXX = clang++
 AS  = nasm
 LD  = ld
 
-C_SRCS      = $(shell find -name '*.c' ! -path './sys/*' ! -path './test/*' ! -path './stdio/*' ! -path './stdlib/malloc.c' )
-C_TEST_SRC  = $(shell find -name '*.c' -path './test/*' ! -path './test/stdio/*' ! -path './test/stdlib/malloc.c' )
-CXX_SRCS    = $(shell find -name '*.cpp' ! -path './test/*' ! -path './stdio/*' ! -path './stdlib/malloc.c')
-LIBC_PATH   = noos_libc.a
-LIBCXX_PATH = noos_libc++.a
-endif
 
+C_SRCS      = $(shell find -name '*.c' ! -path './sys/*' ! -path './test/*' ! -path './stdio/osdep/*' ! -path './stdlib/malloc.c'  $$C_SRC_SEARCH_EX)
+C_TEST_SRC  = $(shell find -name '*.c' -path './test/noos/*' )
+CXX_SRCS    = $(shell find -name '*.cpp' ! -path './test/*' ! -path './stdio/*' ! -path './stdlib/malloc.c' $$CXX_SRCS_SEARCH_EX)
+LIBC_PATH   = $(LIBEXT)noos_libc.a
+LIBCXX_PATH = $(LIBEXT)noos_libc++.a
+endif
 
 
 
@@ -113,7 +118,7 @@ install: all
 
 test: $(C_TEST_SRC)
 	$(call cecho,2,"--- Compiling unit test $< ...")
-	@$(CC) -nostdlib -nostdinc -m32 -I include/  -flto -o $(basename $< .c) $< $(LIBC_PATH)
+	@$(CC) -nostdlib -nostdinc -m32 -I include/ -O0 -flto -o $(basename $< .c) $< $(LIBC_PATH)
 	@chmod +x $(basename $< .c)
 	@if [ -a  $(addsuffix .in,$(shell dirname  $<)/$(basename $< .c)) ] ; \
 	then \
@@ -133,5 +138,7 @@ clean:
 	$(RM) $(LIBC_PATH)
 	$(RM) $(LIBCXX_PATH)
 	$(RM) $(C_TEST_EXECUTABLES)
+	$(RM) *_libc.a
+	$(RM) *_libc++.a
 
 .PHONY: clean

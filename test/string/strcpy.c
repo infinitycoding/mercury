@@ -12,10 +12,10 @@ char normal[] = "hello World!";
 int main(void)
 {
   //check if empty strings are beeing copied
+
   char targetBuffer1[1] = {1};
   char *returnedPointer = strcpy(targetBuffer1,empty);
   assert(targetBuffer1[0]=='\0');
-
   //check if the returned pointer is the same as the destination pointer
   assert(returnedPointer == targetBuffer1);
 
