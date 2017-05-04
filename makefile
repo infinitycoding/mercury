@@ -72,7 +72,7 @@ endif
 AS_OBJS  = $(addsuffix .o,$(basename $(AS_SRCS)))
 C_OBJS   = $(addsuffix .o,$(basename $(C_SRCS)))
 CXX_OBJS = $(addsuffix .o,$(basename $(CXX_SRCS)))
-C_TEST_EXECUTABLES = $(basename $(C_TEST_SRC) .c)
+C_TEST_EXECUTABLES = $(basename $(C_TEST_SRC))
 
 
 #function for colored output
@@ -116,17 +116,22 @@ install: all
 	@mkdir -p "$(PREFIX)/include"
 	@cp -R ./include/* "$(PREFIX)/include/"
 
-test: $(C_TEST_SRC)
-	$(call cecho,2,"--- Compiling unit test $< ...")
-	@$(CC) -nostdlib -nostdinc -m32 -I include/ -O0 -flto -o $(basename $< .c) $< $(LIBC_PATH)
-	@chmod +x $(basename $< .c)
-	@if [ -a  $(addsuffix .in,$(shell dirname  $<)/$(basename $< .c)) ] ; \
-	then \
-		./$(basename $< .c)< $(addsuffix .in,$(shell dirname  $<)/$(basename $< .c)) >$(addsuffix .res,$(shell dirname  $<)/$(basename $< .c)) ; \
-		@diff $(addsuffix .out,$(shell dirname  $<)/$(basename $< .c)) $(addsuffix .res,$(shell dirname  $<)/$(basename $< .c)) ; \
-	else \
-	./$(basename $< .c) ; \
-	fi;
+
+
+$(C_TEST_EXECUTABLES): $(C_TEST_SRC)
+			$(call cecho,2,"--- Compiling unit test $< ...")
+			$(CC) -nostdlib -nostdinc -m32 -I include/ -O0 -flto -o $@ $< $(LIBC_PATH)
+			@chmod +x $(basename $< .c)
+			@if [ -a  $(addsuffix .in,$(shell dirname  $<)/$(basename $< .c)) ] ; \
+			then \
+				./$(basename $< .c)< $(addsuffix .in,$(shell dirname  $<)/$(basename $< .c)) >$(addsuffix .res,$(shell dirname  $<)/$(basename $< .c)) ; \
+				@diff $(addsuffix .out,$(shell dirname  $<)/$(basename $< .c)) $(addsuffix .res,$(shell dirname  $<)/$(basename $< .c)) ; \
+			else \
+			./$(basename $< .c) ; \
+			fi;
+
+test: $(C_TEST_EXECUTABLES)
+	$(call cecho,2,"--- Testing: done ---")
 
 style: $(C_SRCS) $(CXX_SRCS)
 	astyle $(STYLEFLAGS) $^
