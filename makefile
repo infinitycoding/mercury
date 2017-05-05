@@ -119,18 +119,18 @@ install: all
 
 
 $(C_TEST_EXECUTABLES): $(C_TEST_SRC)
-			$(call cecho,2,"--- Compiling unit test $< ...")
-			$(CC) -nostdlib -nostdinc -m32 -I include/ -O0 -flto -o $@ $< $(LIBC_PATH)
-			@chmod +x $(basename $< .c)
-			@if [ -a  $(addsuffix .in,$(shell dirname  $<)/$(basename $< .c)) ] ; \
+			$(call cecho,2,"--- Compiling unit test $@ ...")
+			$(CC) -nostdlib -nostdinc -m32 -I include/ -O0 -flto -o $@ $(addsuffix .c,$@) $(LIBC_PATH)
+			chmod +x $@
+			@if [ -a  $(addsuffix .in,$(shell dirname  $@)/$@) ] ; \
 			then \
-				./$(basename $< .c)< $(addsuffix .in,$(shell dirname  $<)/$(basename $< .c)) >$(addsuffix .res,$(shell dirname  $<)/$(basename $< .c)) ; \
-				@diff $(addsuffix .out,$(shell dirname  $<)/$(basename $< .c)) $(addsuffix .res,$(shell dirname  $<)/$(basename $< .c)) ; \
+				./$@< $(addsuffix .in,$(shell dirname  $@)/$@) >$(addsuffix .res,$(shell dirname  $@)/$@) ; \
+				@diff $(addsuffix .out,$(shell dirname  $@)/$@) $(addsuffix .res,$(shell dirname  $@)/$@) ; \
 			else \
-			./$(basename $< .c) ; \
+			./$@; \
 			fi;
 
-test: $(C_TEST_EXECUTABLES)
+test: all $(C_TEST_EXECUTABLES)
 	$(call cecho,2,"--- Testing: done ---")
 
 style: $(C_SRCS) $(CXX_SRCS)
