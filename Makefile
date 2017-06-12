@@ -130,7 +130,7 @@ $(C_TEST_EXECUTABLES): $(C_TEST_SRC)
 			./$@; \
 			fi;
 
-test: all $(C_TEST_EXECUTABLES)
+run: all $(C_TEST_EXECUTABLES)
 	$(call cecho,2,"--- Testing: done ---")
 
 style: $(C_SRCS) $(CXX_SRCS)

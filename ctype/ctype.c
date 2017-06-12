@@ -61,7 +61,7 @@ int isalpha(int c)
  **/
 int iscntrl(int c)
 {
-    if ( (c >= 0x0 && c > 0x20) || c == 0x7F)
+    if ( (c >= 0x0 && c < 0x20) || c == 0x7F)
     {
         return true;
     }

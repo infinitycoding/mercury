@@ -14,12 +14,12 @@ int main(void)
   //testing if all alphanumerical characters are recognized
   for(int i = 0; i < strlen(digits); i++)
   {
-    assert(isalnum(digits[i]));
+    assert(isdigit(digits[i]));
   }
 
   for(unsigned char x = 0; x < 255; x++)
   {
-    if(isalnum(x))
+    if(isdigit(x))
     {
       int flg = 0;
       for(int i = 0; i < strlen(digits); i++)

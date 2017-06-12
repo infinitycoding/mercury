@@ -14,7 +14,7 @@ int main(void)
   {
     if(iscntrl(x))
     {
-      assert(x>=0x20 && x!=0x7F);
+      assert(x<0x20 || x==0x7F);
     }
   }
   return 0;
