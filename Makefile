@@ -17,7 +17,7 @@ CXX_SRCS    = $(shell find -name '*.cpp' ! -path './test/*' $(CXX_SRCS_SEARCH_EX
 
 ARFLAGS     = -rcs
 ASFLAGS     = -felf32
-CFLAGS      = -m32 -Wall -fno-builtin -fno-builtin-log -nostdinc -Iinclude
+CFLAGS      += -m32 -Wall -fno-builtin -fno-builtin-log -nostdinc -Iinclude
 CXXFLAGS    = -m32 -Wall -fno-builtin -fno-builtin-log -fno-rtti -fno-exceptions -nostdinc -Iinclude/cpp -Iinclude
 STYLEFLAGS  = --style=allman
 
