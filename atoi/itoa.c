@@ -31,5 +31,11 @@
  */
 char *itoa(int value, char * str, int base)
 {
-    return itoa_ex(value, str, base, 0, 1);
+    if(base < 0){
+      return itoa_ex(value, str,-1*base, 0, 1);
+    }
+    else
+    {
+        return itoa_ex(value, str,-base, 0, 1);
+    }
 }

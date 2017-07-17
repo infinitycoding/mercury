@@ -1,7 +1,7 @@
 #insert zour target here
 TARGET ?= linux
 PREFIX ?= /opt/mercury
-
+ARCH   ?= I386
 
 ifeq ($(noheap),true)
 C_SRC_SEARCH_EX       = ! -path './list.c' ! -path './stdlib/malloc.c' ! -path './libgen/*'
@@ -9,64 +9,19 @@ CXX_SRCS_SEARCH_EX    = $(C_SRC_SEARCH_EX) ! -path '.cpp/new.cpp'
 LIBEXT                =noheap_
 endif
 
-
 C_SRCS      = $(shell find -name '*.c' ! -path './sys/*' ! -path './test/*' $(C_SRC_SEARCH_EX) )
 C_TEST_SRC  = $(shell find -name '*.c' -path './test/*' )
-AS_SRCS     = $(shell find -name '*.asm' ! -path './sys/*' ! -path './test/*' )
-CXX_SRCS    = $(shell find -name '*.cpp' ! -path './test/*' $(CXX_SRCS_SEARCH_EX))
+AS_SRCS     = $(shell find -name '*.asm' ! -path './crt/*' ! -path './sys/*' ! -path './test/*' )
+CXX_SRCS    = $(shell find -name '*.cpp' ! -path './test/*'  $(CXX_SRCS_SEARCH_EX))
 
 ARFLAGS     = -rcs
 ASFLAGS     = -felf32
-CFLAGS      += -m32 -Wall -fno-builtin -fno-builtin-log -nostdinc -Iinclude
-CXXFLAGS    = -m32 -Wall -fno-builtin -fno-builtin-log -fno-rtti -fno-exceptions -nostdinc -Iinclude/cpp -Iinclude
+CFLAGS     +=  -Wall -fno-builtin -fno-builtin-log -nostdinc -nostdlib  -Iinclude
+CXXFLAGS    =  -Wall -fno-builtin -fno-builtin-log -fno-rtti -fno-exceptions -nostdinc -Iinclude/cpp -Iinclude
 STYLEFLAGS  = --style=allman
 
-#Operating system switch
-#Universe
-ifeq ($(TARGET), universe)
-CC  = i686-universe-gcc
-CXX = i686-universe-g++
-AS  = nasm
-LD  = i686-universe-ld
 
-AS_SRCS    += $(shell find -path './sys/universe/*.asm')
-C_SRCS     += $(shell find -path './sys/universe/*.c')
-CFLAGS     += -Iinclude/universe
-CXXFLAGS   += -Iinclude/univers
-LIBC_PATH   = $(LIBEXT)universe_libc.a
-LIBCXX_PATH = $(LIBEXT)universe_libc++.a
-
-
-#Linux
-else ifeq ($(TARGET), linux)
-CC  = clang
-CXX = clang++
-AS  = nasm
-LD  = ld
-
-AS_SRCS    += $(shell find -path './sys/linux/*.asm')
-C_SRCS     += $(shell find -path './sys/linux/*.c')
-CFLAGS     += -Iinclude/linux
-CXXFLAGS   += -Iinclude/linux
-LIBC_PATH   = $(LIBEXT)linux_libc.a
-LIBCXX_PATH = $(LIBEXT)linux_libc++.a
-
-
-#no operating system
-else ifeq ($(TARGET), noos)
-CC  = clang
-CXX = clang++
-AS  = nasm
-LD  = ld
-
-
-C_SRCS      = $(shell find -name '*.c' ! -path './sys/*' ! -path './test/*' ! -path './stdio/osdep/*' ! -path './stdlib/malloc.c'  $$C_SRC_SEARCH_EX)
-C_TEST_SRC  = $(shell find -name '*.c' -path './test/noos/*' )
-CXX_SRCS    = $(shell find -name '*.cpp' ! -path './test/*' ! -path './stdio/*' ! -path './stdlib/malloc.c' $$CXX_SRCS_SEARCH_EX)
-LIBC_PATH   = $(LIBEXT)noos_libc.a
-LIBCXX_PATH = $(LIBEXT)noos_libc++.a
-endif
-
+include building/$(TARGET)/$(ARCH).mk
 
 
 AS_OBJS  = $(addsuffix .o,$(basename $(AS_SRCS)))
@@ -120,7 +75,7 @@ install: all
 
 $(C_TEST_EXECUTABLES): $(C_TEST_SRC)
 			$(call cecho,2,"--- Compiling unit test $@ ...")
-			$(CC) -nostdlib -nostdinc -m32 -I include/ -O0 -flto -o $@ $(addsuffix .c,$@) $(LIBC_PATH)
+			$(CC) -nostdlib -nostdinc -m32 -I include/ -O0 -flto -o  $@ crt/i386/crt0.o $(addsuffix .c,$@) $(LIBC_PATH)
 			chmod +x $@
 			@if [ -a  $(addsuffix .in,$(shell dirname  $@)/$@) ] ; \
 			then \
