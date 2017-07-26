@@ -75,7 +75,7 @@ install: all
 
 $(C_TEST_EXECUTABLES): $(C_TEST_SRC)
 			$(call cecho,2,"--- Compiling unit test $@ ...")
-			$(CC) -nostdlib -nostdinc -m32 -I include/ -O0 -flto -o  $@ crt/i386/crt0.o $(addsuffix .c,$@) $(LIBC_PATH)
+			$(CC) -nostdlib -nostdinc -m32 -I include/ -O0 -flto -o  $@ sys/$(TARGET)/$(ARCH)/crt/crt0.o $(addsuffix .c,$@) $(LIBC_PATH)
 			chmod +x $@
 			@if [ -a  $(addsuffix .in,$(shell dirname  $@)/$@) ] ; \
 			then \
