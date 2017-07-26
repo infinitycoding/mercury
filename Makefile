@@ -16,8 +16,8 @@ CXX_SRCS    = $(shell find -name '*.cpp' ! -path './test/*'  $(CXX_SRCS_SEARCH_E
 
 ARFLAGS     = -rcs
 ASFLAGS     = -felf32
-CFLAGS     +=  -Wall -fno-builtin -fno-builtin-log -nostdinc -nostdlib  -Iinclude
-CXXFLAGS    =  -Wall -fno-builtin -fno-builtin-log -fno-rtti -fno-exceptions -nostdinc -Iinclude/cpp -Iinclude
+CFLAGS     +=  -Wall -fno-builtin -fno-builtin-log -nostdinc -nostdlib -std=gnu99 -Iinclude
+CXXFLAGS    =  -Wall -fno-builtin -fno-builtin-log -fno-rtti -fno-exceptions -nostdinc -nostdlib -Iinclude/cpp -Iinclude
 STYLEFLAGS  = --style=allman
 
 
@@ -75,8 +75,8 @@ install: all
 
 $(C_TEST_EXECUTABLES): $(C_TEST_SRC)
 			$(call cecho,2,"--- Compiling unit test $@ ...")
-			$(CC) -nostdlib -nostdinc -m32 -I include/ -O0 -flto -o  $@ sys/$(TARGET)/$(ARCH)/crt/crt0.o $(addsuffix .c,$@) $(LIBC_PATH)
-			chmod +x $@
+			@$(CC) $(CFLAGS) -I include/ -O0 -flto -o  $@ sys/$(TARGET)/$(ARCH)/crt/crt0.o $(addsuffix .c,$@) $(LIBC_PATH)
+			@chmod +x $@
 			@if [ -a  $(addsuffix .in,$(shell dirname  $@)/$@) ] ; \
 			then \
 				./$@< $(addsuffix .in,$(shell dirname  $@)/$@) >$(addsuffix .res,$(shell dirname  $@)/$@) ; \
