@@ -36,6 +36,6 @@ char *itoa(int value, char * str, int base)
     }
     else
     {
-        return itoa_ex(value, str,-base, 0, 1);
+        return itoa_ex(value, str,base, 0, 1);
     }
 }

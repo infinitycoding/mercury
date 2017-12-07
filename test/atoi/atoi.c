@@ -36,8 +36,6 @@ char *StaticResultsHex[22] =
 
 
 
-
-
 char output[255] = {0};
 
 
@@ -45,7 +43,7 @@ char output[255] = {0};
 int main(void)
 {
   //testing static dec table
-/*  for(int i = 0; i < 22; i++)
+  for(int i = 0; i < 22; i++)
   {
     itoa(StaticValues[i], output, 10);
     assert(!strcmp(output,StaticResultsDec[i]));
@@ -56,7 +54,7 @@ int main(void)
   {
     itoa(StaticValues[i], output, 16);
     assert(!strcmp(output,StaticResultsHex[i]));
-  }*/
+  }
 
   return 0;
 }
