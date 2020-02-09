@@ -21,8 +21,10 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-/*
-int fork()
+#define SYS_FORK        2
+#define SYS_EXECVE      11
+
+pid_t fork()
 {
     int pid;
     asm volatile("int $128;": "=a"(pid) : "a" (SYS_FORK));
@@ -35,7 +37,6 @@ uint32_t execve(const char *filename, char **argv, char **envp)
     asm volatile("int $128;": "=a"(ret) : "a" (SYS_EXECVE), "b" (filename), "c" (argv), "d" (envp));
     return ret;
 }
-*/
 
 // universe stuff
 
