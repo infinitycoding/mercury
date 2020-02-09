@@ -478,7 +478,6 @@ template <typename T>
 void ListIterator<T>::set(ListNode<T> *n)
 {
     currentNode = n;
-    return this;
 }
 
 template <typename T>
